@@ -1,0 +1,16 @@
+#next-button {
+  height: 6%;
+  width: 55%;
+  background-color: orange;
+  color: white;
+  font-size: 18pt;
+  font-weight: bold;
+  margin-top: 40%;
+  margin-left: 25%;
+
+  >.next-icon {
+    position: relative;
+    margin-left: 5%;
+  }
+
+}

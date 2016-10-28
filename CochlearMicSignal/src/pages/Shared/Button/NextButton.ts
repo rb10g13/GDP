@@ -1,13 +1,12 @@
 import {NavController} from 'ionic-angular';
 import {Component} from '@angular/core';
-import {Header} from '../Shared/Header/Header';
-import {Footer} from '../Shared/Footer/Footer';
 
 @Component({
-  templateUrl: 'home-page.html',
+  templateUrl: 'next-button-page.html',
+  selector: 'next-button'
 })
 
-export class HomePage {
+export class NextButton {
 
   constructor(public navCtrl: NavController) {
 
