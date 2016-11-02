@@ -5,5 +5,9 @@
   /* Set the hr color */
   color: #333; /* old IE */
   background-color: #ffb741; /* Modern Browsers */
-  margin-top: 15%;
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
 }

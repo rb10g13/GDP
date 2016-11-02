@@ -1,5 +1,7 @@
-<button id="next-button">
-  <span id="next-label">Next</span>
-  <ion-icon id="arrow-icon" name="md-arrow-round-forward"></ion-icon>
+<button id="next-button" (click)="proceedToTest()">
+  <div class="label-arrow" center>
+    <span id="next-label">{{buttonName}}</span>
+    <span id="arrow" [hidden]="hiddenArrow"><ion-icon id="arrow-icon" name="md-arrow-round-forward"></ion-icon></span>
+  </div>
 </button>
 
