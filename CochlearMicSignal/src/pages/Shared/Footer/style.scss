@@ -1,0 +1,13 @@
+#progress-bar {
+  border: none;
+  height: 17px;
+  width: 80%;
+  /* Set the hr color */
+  color: #333; /* old IE */
+  background-color: #ffb741; /* Modern Browsers */
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px;
+  width:100%;
+}

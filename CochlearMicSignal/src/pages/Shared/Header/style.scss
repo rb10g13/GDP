@@ -1,0 +1,13 @@
+.header {
+  background-color: #ffb741;
+  color:white;
+  height: 7%;
+  font-size: 18pt;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 7px;
+
+  >.inner-text {
+    font-weight: normal;
+  }
+}

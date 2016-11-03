@@ -1,0 +1,28 @@
+#home-title {
+  padding-top: 35%;
+  text-align:center;
+  color: #ffb741;
+  font-family: Arial;
+  >.first {
+
+  }
+  >.second {
+    font-weight: bold;
+  }
+}
+
+.nhs-number-container {
+  text-align: center;
+  padding-top: 4%;
+
+  >#input {
+    color: #bfbfbf;
+    height: 28px;
+    width: 175px;
+    text-align: center;
+    background-color: #eeeeee;
+    border: 2px solid #ffb741;
+    border-radius: 4px;
+    padding-left: 7px;
+  }
+}
