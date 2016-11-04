@@ -1,7 +1,5 @@
-import {NavController,Button} from 'ionic-angular';
-import {Component, ViewChild, OnInit} from '@angular/core';
-import {Header} from '../../Shared/Header/Header';
-import {Footer} from '../../Shared/Footer/Footer';
+import {NavController} from 'ionic-angular';
+import {Component} from '@angular/core';
 import {BeginTestService} from "./BeginTestService.service";
 import {ProgressPanel} from "../InProgress/ProgressPanel";
 
@@ -9,18 +7,15 @@ import {ProgressPanel} from "../InProgress/ProgressPanel";
   templateUrl: 'begin-page.html'
 })
 
-export class BeginTest implements OnInit{
+export class BeginTest{
+
+  buttonName:String = "Begin Test";
 
   constructor(public navCtrl: NavController, private beginTestService: BeginTestService) {
 
   }
 
-  ngOnInit() {
-    this.beginTestService.buttonName = "Begin Test";
-  }
-
   beginTest() {
-    this.navCtrl.pop(BeginTest);
     this.navCtrl.setRoot(ProgressPanel, {}, {animate: true, direction: 'left'});
   }
 }

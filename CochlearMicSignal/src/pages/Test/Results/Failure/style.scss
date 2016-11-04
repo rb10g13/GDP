@@ -1,30 +1,29 @@
-.success-container {
+.failure-container {
   text-align:center;
   color: #ffb741;
   font-family: Arial;
   margin-top: 20%;
 
-    >#success-message {
+    >#fail-message {
       display: inline-block;
       width: 250px;
     }
 
-    >#success-title {
-      color: #76c47f;
+    >#fail-title {
+      color: red;
     }
 }
 
 .icon {
   text-align:center;
-
   display: block;
-  >.tick-icon {
+  >.cross-icon {
     font-size: 200px;
-    color: #76c47f;
+    color: red;
   }
 }
 
-#finish-button {
+#test-again-button {
   height: 8%;
   width: 52%;
   background-color: #f0ab3d;
@@ -35,7 +34,7 @@
   border: 1px solid #f0ab3d;
   box-shadow:0px 3px 3px #bfbfbf;
 }
-#finish-label {
+#test-again-label {
   /*padding-left: 13%;*/
   padding-top: 3%;
   display: inline-block;
@@ -43,7 +42,7 @@
   width: 120px;
 
 }
-#arrow-icon {
+#refresh-icon {
   display: inline-block;
   /*padding-left: 70%;*/
   font-size: 155%;

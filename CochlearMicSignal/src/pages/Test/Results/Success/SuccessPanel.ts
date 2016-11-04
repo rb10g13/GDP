@@ -7,17 +7,11 @@ import {NextButton} from "../../../Shared/Button/NextButton"
   templateUrl: 'success-page.html'
 })
 
-export class SuccessPanel implements OnInit {
+export class SuccessPanel {
 
   buttonName:String = "Finish"
 
   constructor(public navCtrl: NavController, private beginTestService: BeginTestService) {
 
   }
-
-  ngOnInit() {
-    this.beginTestService.buttonName = this.buttonName;
-    this.beginTestService.hiddenArrow = true;
-  }
-
 }
