@@ -1,7 +1,7 @@
 import {NavController} from 'ionic-angular';
-import {Component} from '@angular/core';
-import {BeginTest} from '../../Test/BeginTest/BeginTest';
+import {Component} from '@angular/core';;
 import {BeginTestService} from "../../Test/BeginTest/BeginTestService.service";
+import {ImplantSetUpPanel} from "../../HardwareSetUp/ImplantSetUp/ImplantSetUpPanel";
 
 @Component({
   templateUrl: 'next-button-page.html',
@@ -18,7 +18,7 @@ export class NextButton{
 
   proceedToTest() {
     //a function to check if the device is connected
-    this.nav.setRoot(BeginTest, {}, {animate: true, direction: 'left'});
+    this.nav.setRoot(ImplantSetUpPanel, {}, {animate: true, direction: 'left'});
   }
 
 }

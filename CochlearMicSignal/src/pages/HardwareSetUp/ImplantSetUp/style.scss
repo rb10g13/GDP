@@ -1,0 +1,48 @@
+.implant-text-container {
+  text-align:center;
+  color: #feba4b;
+  font-family: Arial;
+  margin-top: 15%;
+
+    >#title {
+      display: inline-block;
+      width: 250px;
+      margin-bottom: 7%;
+    }
+}
+
+.spinner-container {
+  text-align:center;
+  display: block;
+
+  >.spinner-ios {
+    width: 28px;
+    height: 28px;
+    stroke: yellow;
+    fill: white;
+  }
+}
+
+.deaf-icon-container {
+  text-align:center;
+  display: block;
+  >.icon {
+    font-size: 100px;
+    color: #949494;
+    margin-bottom: 20%;
+  }
+}
+
+#temp-button {
+  height: 8%;
+  width: 25%;
+  background-color: #f0ab3d;
+  color: white;
+  text-align: center;
+  font-size: 13pt;
+  margin-left: 23%;
+  border: 1px solid #f0ab3d;
+  box-shadow:0px 3px 3px #bfbfbf;
+}
+
+

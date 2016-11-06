@@ -10,6 +10,7 @@ import {BeginTestService} from "../pages/Test/BeginTest/BeginTestService.service
 import {ProgressPanel} from "../pages/Test/InProgress/ProgressPanel";
 import {SuccessPanel} from "../pages/Test/Results/Success/SuccessPanel"
 import {ErrorPanel} from "../pages/Test/Results/Failure/ErrorPanel";
+import {ImplantSetUpPanel} from "../pages/HardwareSetUp/ImplantSetUp/ImplantSetUpPanel";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {ErrorPanel} from "../pages/Test/Results/Failure/ErrorPanel";
     BeginTest,
     ProgressPanel,
     SuccessPanel,
-    ErrorPanel
+    ErrorPanel,
+    ImplantSetUpPanel,
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -36,7 +38,8 @@ import {ErrorPanel} from "../pages/Test/Results/Failure/ErrorPanel";
     BeginTest,
     ProgressPanel,
     SuccessPanel,
-    ErrorPanel
+    ErrorPanel,
+    ImplantSetUpPanel
   ],
   providers: [BeginTestService]
 })

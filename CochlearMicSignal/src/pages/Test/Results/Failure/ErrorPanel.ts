@@ -17,6 +17,5 @@ export class ErrorPanel {
 
   testAgain() {
     this.navCtrl.setRoot(ProgressPanel, {}, {animate: true, direction: 'left'});
-
   }
 }

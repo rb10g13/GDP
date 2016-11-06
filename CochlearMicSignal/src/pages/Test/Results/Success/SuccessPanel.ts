@@ -1,7 +1,7 @@
 import { NavController } from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
 import {BeginTestService} from "../../BeginTest/BeginTestService.service";
-import {NextButton} from "../../../Shared/Button/NextButton"
+import {HomePage} from "../../../HomePage/HomePage";
 
 @Component({
   templateUrl: 'success-page.html'
@@ -13,5 +13,9 @@ export class SuccessPanel {
 
   constructor(public navCtrl: NavController, private beginTestService: BeginTestService) {
 
+  }
+
+  testAgain() {
+    this.navCtrl.setRoot(HomePage, {}, {animate: true, direction: 'left'});
   }
 }
