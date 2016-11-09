@@ -1,13 +1,13 @@
 import { NavController } from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
 import {BeginTestService} from "../../BeginTest/BeginTestService.service";
-import {NextButton} from "../../../Shared/Button/NextButton"
+import {HomePage} from "../../../HomePage/HomePage";
 
 @Component({
   templateUrl: 'success-page.html'
 })
 
-export class SuccessPanel implements OnInit {
+export class SuccessPanel {
 
   buttonName:String = "Finish"
 
@@ -15,9 +15,7 @@ export class SuccessPanel implements OnInit {
 
   }
 
-  ngOnInit() {
-    this.beginTestService.buttonName = this.buttonName;
-    this.beginTestService.hiddenArrow = true;
+  testAgain() {
+    this.navCtrl.setRoot(HomePage, {}, {animate: true, direction: 'left'});
   }
-
 }
