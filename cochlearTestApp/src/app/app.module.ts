@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
-import { IonicApp, IonicModule } from 'ionic-angular';
+import {IonicApp, IonicModule} from 'ionic-angular';
 import { MyApp } from './app.component';
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
-import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+import { HomePage } from '../pages/HomePage/HomePage';
+import { Header } from '../pages/Shared/Header/Header';
+import {Footer} from "../pages/Shared/Footer/Footer";
+import {NextButton} from "../pages/Shared/Button/NextButton";
+import {BeginTest} from "../pages/Test/BeginTest/BeginTest";
+import {BeginTestService} from "../pages/Test/BeginTest/BeginTestService.service";
+import {ProgressPanel} from "../pages/Test/InProgress/ProgressPanel";
+import {SuccessPanel} from "../pages/Test/Results/Success/SuccessPanel"
 
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage
+    Header,
+    Footer,
+    NextButton,
+    BeginTest,
+    ProgressPanel,
+    SuccessPanel
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -20,11 +27,14 @@ import { TabsPage } from '../pages/tabs/tabs';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
-    TabsPage
+    Header,
+    Footer,
+    NextButton,
+    BeginTest,
+    ProgressPanel,
+    SuccessPanel
   ],
-  providers: []
+  providers: [BeginTestService]
 })
 export class AppModule {}

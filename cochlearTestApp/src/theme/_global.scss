@@ -1,0 +1,22 @@
+.text-semibold {
+  font-weight: 500;
+}
+
+.text-bold {
+  font-weight: 600;
+}
+
+.text-regular {
+  font-weight: 400;
+}
+
+.GDP-input {
+  background-color: $light-gray;
+  border: 3px solid $primary-color;
+  color: $dark-gray;
+  height: 40px;
+  width: calc(100% - 30px);
+  border-radius: $border-radius;
+  max-width: 220px;
+  font-size: 18px !important;
+}
