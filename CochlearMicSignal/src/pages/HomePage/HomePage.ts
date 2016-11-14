@@ -15,5 +15,4 @@ export class HomePage implements OnInit{
   constructor(public navCtrl: NavController, public service: BeginTestService) {
 
   }
-
 }

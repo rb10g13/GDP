@@ -1,0 +1,27 @@
+.success-container {
+  text-align:center;
+  color: #ffb741;
+  font-family: Arial;
+  margin-top: 20%;
+
+    >#success-message {
+      display: inline-block;
+      width: 250px;
+    }
+
+    >#success-title {
+      color: #76c47f;
+    }
+}
+
+.icon {
+  text-align:center;
+
+  display: block;
+  >.tick-icon {
+    font-size: 200px;
+    color: #76c47f;
+  }
+}
+
+
