@@ -1,5 +1,4 @@
-
-
+@import 'ionic.globals';
 
 $text-color:        #000;
 $background-color:  #fff;
@@ -18,3 +17,9 @@ $ionicons-font-path: '../assets/fonts';
   font-weight: normal;
   font-style: normal;
 }
+
+@import 'ionic.theme.default';
+
+$ionicons-font-path: '../assets/fonts';
+
+@import 'ionicons';
