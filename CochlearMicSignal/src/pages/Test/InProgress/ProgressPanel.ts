@@ -1,17 +1,24 @@
 import { NavController } from 'ionic-angular';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SuccessPanel} from "../Results/Success/SuccessPanel";
 import {ErrorPanel} from "../Results/Failure/ErrorPanel";
+import {BeginTestService} from "../BeginTest/BeginTestService.service";
 
 @Component({
   templateUrl: 'progress-page.html'
 })
 
-export class ProgressPanel {
+export class ProgressPanel implements OnInit{
 
-  constructor(public navCtrl: NavController) {
+  ngOnInit() {
+    this.service.pageNumber = 3;
+  }
+
+
+  constructor(public navCtrl: NavController, public service: BeginTestService) {
 
   }
+
 
   proceedToSuccessPanel() {
       //depending on the result, we will root the Success or Failure component

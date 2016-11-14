@@ -7,4 +7,6 @@ export class BeginTestService {
 
   buttonName:String = "Next";
   hiddenArrow:boolean = false;
+  pageNumber:number;
+  isActive: boolean;
 }

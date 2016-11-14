@@ -1,14 +1,40 @@
 import { NavController } from 'ionic-angular';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {BeginTestService} from "../../Test/BeginTest/BeginTestService.service";
 
 @Component({
   templateUrl: 'footer.html',
   selector: 'app-footer'
 })
 
-export class Footer {
+export class Footer implements OnInit{
 
-  constructor(public navCtrl: NavController) {
+  firstActive: string = '';
+  secondActive: string = '';
+  thirdActive: string = '';
+  fourthActive: string = '';
+
+  ngOnInit() {
+    var page = this.service.pageNumber;
+    switch(page)
+    {
+      case 1:
+        this.firstActive = 'active';
+        break;
+      case 2:
+        this.secondActive = 'active';
+        break;
+      case 3:
+        this.thirdActive = 'active';
+        break;
+      case 4:
+        this.fourthActive = 'active';
+        break;
+      default: '';
+    }
+  }
+
+  constructor(public navCtrl: NavController, public service: BeginTestService) {
 
   }
 

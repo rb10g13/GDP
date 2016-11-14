@@ -23,7 +23,7 @@ import {ImplantSetUpPanel} from "../pages/HardwareSetUp/ImplantSetUp/ImplantSetU
     ProgressPanel,
     SuccessPanel,
     ErrorPanel,
-    ImplantSetUpPanel,
+    ImplantSetUpPanel
   ],
   imports: [
     IonicModule.forRoot(MyApp)

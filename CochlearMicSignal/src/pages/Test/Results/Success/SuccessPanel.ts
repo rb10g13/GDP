@@ -7,11 +7,16 @@ import {HomePage} from "../../../HomePage/HomePage";
   templateUrl: 'success-page.html'
 })
 
-export class SuccessPanel {
+export class SuccessPanel implements OnInit{
 
   buttonName:String = "Finish"
 
-  constructor(public navCtrl: NavController, private beginTestService: BeginTestService) {
+  ngOnInit() {
+    this.service.pageNumber = 4;
+  }
+
+
+  constructor(public navCtrl: NavController, private service: BeginTestService) {
 
   }
 

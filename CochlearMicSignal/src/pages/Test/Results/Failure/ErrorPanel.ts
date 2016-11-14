@@ -1,5 +1,5 @@
 import { NavController } from 'ionic-angular';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BeginTestService} from "../../BeginTest/BeginTestService.service";
 import {ProgressPanel} from "../../InProgress/ProgressPanel";
 
@@ -7,11 +7,16 @@ import {ProgressPanel} from "../../InProgress/ProgressPanel";
   templateUrl: 'error-page.html'
 })
 
-export class ErrorPanel {
+export class ErrorPanel implements OnInit{
 
   buttonName:String = "Test Again"
 
-  constructor(public navCtrl: NavController, private beginTestService: BeginTestService) {
+  ngOnInit() {
+    this.service.pageNumber = 4;
+  }
+
+
+  constructor(public navCtrl: NavController, private service: BeginTestService) {
 
   }
 
