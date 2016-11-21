@@ -1,54 +1,6 @@
-/*
-#home-title {
-  padding-top: 35%;
-  text-align:center;
-  color: #ffb741;
-  font-family: Arial;
-  >.first {
-
-  }
-  >.second {
-    font-weight: bold;
-  }
-}
-
-.nhs-number-container {
-  text-align: center;
-  padding-top: 4%;
-  padding-left: 17%;
-  float:left;
-
-  >#ci-number {
-    color: #bfbfbf;
-    height: 28px;
-    width: 175px;
-    text-align: center;
-    background-color: #eeeeee;
-    border: 2px solid #ffb741;
-    border-radius: 4px;
-    padding-left: 7px;
-  }
-}
-
-.implant-label-container {
-  text-align: center;
-  padding: 4% 0 0 4%;
-  float:left;
-
-  >#implant-input {
-    color: #bfbfbf;
-    height: 28px;
-    width: 35px;
-    text-align: center;
-    background-color: #eeeeee;
-    border: 2px solid #ffb741;
-    border-radius: 4px;
-  }
-}*/
-
-/* Smartphones (portrait) 320-360px ----------- */
+/* Smartphones (portrait) ----------- */
 @media only screen
-and (min-width : 320px) and (max-width: 360px)
+and (max-width : 320px)
 and (orientation: portrait){
   #home-title {
     padding-top: 35%;
@@ -83,54 +35,8 @@ and (orientation: portrait){
 
   .implant-label-container {
     text-align: center;
-    padding: 4% 0 0 4%;
+    padding: 4% 0 0 2%;
     float:left;
-
-    >#implant-input {
-      color: #bfbfbf;
-      height: 28px;
-      width: 35px;
-      text-align: center;
-      background-color: #eeeeee;
-      border: 2px solid #ffb741;
-      border-radius: 4px;
-    }
-  }
-
-  #home-title {
-    padding-top: 17%;
-    text-align: center;
-    color: #ffb741;
-    font-family: Arial;
-    width: 89%;
-    padding-left: 10%;
-    >.first {
-
-    }
-    >.second {
-      font-weight: bold;
-    }
-  }
-
-  .nhs-number-container {
-    text-align: center;
-    padding-top: 4%;
-
-    >#ci-number {
-      color: #bfbfbf;
-      height: 28px;
-      width: 175px;
-      text-align: center;
-      background-color: #eeeeee;
-      border: 2px solid #ffb741;
-      border-radius: 4px;
-      padding-left: 7px;
-    }
-  }
-
-  .implant-label-container {
-    text-align: center;
-    padding: 4% 0 0 0%;
 
     >#implant-input {
       color: #bfbfbf;
@@ -155,80 +61,37 @@ and (orientation: portrait){
       border: 1px solid #f0ab3d;
       box-shadow: 0px 3px 3px #bfbfbf;
     }
-    #next-label {
-      padding-top: 4%;
-      padding-left: 12%;
-      display: inline-block;
-      vertical-align: top;
-      width: 120px;
+    .inner {
+      width: 150px;
 
-    }
-    #arrow-icon {
-      display: inline-block;
-      font-size: 155%;
-      vertical-align: top;
+      >#next-label {
+        padding-top: 5%;
+        padding-left: 13%;
+        display: inline-block;
+        vertical-align: top;
+        width: 94px;
+      }
+
+      >#arrow-icon {
+        display: inline-block;
+        font-size: 155%;
+        vertical-align: top;
+        padding-top: 2%;
+      }
     }
   }
 }
 
-/* Smartphones abnormal size(portrait) ----------- */
+/* Smartphones iPhone 5 and bigger (Portrait)*/
 @media only screen
-and (min-width : 360px) and (max-width: 413px)
-and (orientation: portrait) {
+and (min-width : 321px) and (max-width: 375px) {
   #home-title {
-    padding-top: 35%;
+    padding-top: 30%;
     text-align:center;
     color: #ffb741;
-    font-family: Arial;
-    >.first {
-
-    }
-    >.second {
-      font-weight: bold;
-    }
-  }
-
-  .nhs-number-container {
-    text-align: center;
-    padding-top: 4%;
-    padding-left: 22%;
-    float:left;
-
-    >#ci-number {
-      color: #bfbfbf;
-      height: 28px;
-      width: 175px;
-      text-align: center;
-      background-color: #eeeeee;
-      border: 2px solid #ffb741;
-      border-radius: 4px;
-      padding-left: 7px;
-    }
-  }
-
-  .implant-label-container {
-    text-align: center;
-    padding: 4% 0 0 4%;
-    float:left;
-
-    >#implant-input {
-      color: #bfbfbf;
-      height: 28px;
-      width: 35px;
-      text-align: center;
-      background-color: #eeeeee;
-      border: 2px solid #ffb741;
-      border-radius: 4px;
-    }
-  }
-
-  #home-title {
-    padding-top: 17%;
-    text-align: center;
-    color: #ffb741;
-    font-family: Arial;
-    width: 89%;
+    width: 90%;
     padding-left: 10%;
+    font-family: Arial;
     >.first {
 
     }
@@ -240,6 +103,8 @@ and (orientation: portrait) {
   .nhs-number-container {
     text-align: center;
     padding-top: 4%;
+    padding-left: 24%;
+    float:left;
 
     >#ci-number {
       color: #bfbfbf;
@@ -255,7 +120,8 @@ and (orientation: portrait) {
 
   .implant-label-container {
     text-align: center;
-    padding: 4% 0 0 0%;
+    padding: 4% 0 0 2%;
+    float:left;
 
     >#implant-input {
       color: #bfbfbf;
@@ -274,40 +140,131 @@ and (orientation: portrait) {
       color: white;
       text-align: center;
       font-size: 15pt;
-      margin-top: 48%;
-      margin-left: 30%;
+      margin-top: 55%;
+      margin-left: 29%;
       padding: 1% 1% 1% 1%;
       border: 1px solid #f0ab3d;
       box-shadow: 0px 3px 3px #bfbfbf;
     }
-    #next-label {
-      padding-top: 4%;
-      padding-left: 12%;
-      display: inline-block;
-      vertical-align: top;
-      width: 120px;
+    .inner {
+      width: 150px;
+
+      >#next-label {
+        padding-top: 5%;
+        padding-left: 13%;
+        display: inline-block;
+        vertical-align: top;
+        width: 94px;
+      }
+
+      >#arrow-icon {
+        display: inline-block;
+        font-size: 155%;
+        vertical-align: top;
+        padding-top: 2%;
+      }
+    }
+  }
+}
+
+/* Smartphones iPhone 6 and bigger (Portrait)*/
+@media only screen
+and (min-width : 376px) and (max-width: 414px) {
+  #home-title {
+    padding-top: 30%;
+    text-align:center;
+    color: #ffb741;
+    width: 90%;
+    padding-left: 10%;
+    font-family: Arial;
+    >.first {
 
     }
-    #arrow-icon {
-      display: inline-block;
-      font-size: 155%;
-      vertical-align: top;
+    >.second {
+      font-weight: bold;
+    }
+  }
+
+  .nhs-number-container {
+    text-align: center;
+    padding-top: 4%;
+    padding-left: 24%;
+    float:left;
+
+    >#ci-number {
+      color: #bfbfbf;
+      height: 28px;
+      width: 175px;
+      text-align: center;
+      background-color: #eeeeee;
+      border: 2px solid #ffb741;
+      border-radius: 4px;
+      padding-left: 7px;
+    }
+  }
+
+  .implant-label-container {
+    text-align: center;
+    padding: 4% 0 0 2%;
+    float:left;
+
+    >#implant-input {
+      color: #bfbfbf;
+      height: 28px;
+      width: 35px;
+      text-align: center;
+      background-color: #eeeeee;
+      border: 2px solid #ffb741;
+      border-radius: 4px;
+    }
+  }
+
+  .container {
+    #next-button {
+      background-color: #f0ab3d;
+      color: white;
+      text-align: center;
+      font-size: 15pt;
+      margin-top: 55%;
+      margin-left: 31%;
+      padding: 1% 1% 1% 1%;
+      border: 1px solid #f0ab3d;
+      box-shadow: 0px 3px 3px #bfbfbf;
+    }
+    .inner {
+      width: 150px;
+
+      >#next-label {
+        padding-top: 5%;
+        padding-left: 13%;
+        display: inline-block;
+        vertical-align: top;
+        width: 94px;
+      }
+
+      >#arrow-icon {
+        display: inline-block;
+        font-size: 155%;
+        vertical-align: top;
+        padding-top: 2%;
+      }
     }
   }
 }
 
 
-/* Smartphones iPhone 6 and higher (portrait) ----------- */
+/* Tablets (Portrait)*/
 @media only screen
-and (min-width : 414px)
+and (min-width : 415px) and (max-width: 768px)
 and (orientation: portrait){
   #home-title {
-    padding-top: 17%;
-    text-align: center;
+    padding-top: 30%;
+    text-align:center;
     color: #ffb741;
-    font-family: Arial;
-    width: 89%;
+    width: 90%;
     padding-left: 10%;
+    font-family: Arial;
+    font-size: 30pt;
     >.first {
 
     }
@@ -319,31 +276,37 @@ and (orientation: portrait){
   .nhs-number-container {
     text-align: center;
     padding-top: 4%;
+    padding-left: 20%;
+    float:left;
 
     >#ci-number {
       color: #bfbfbf;
-      height: 28px;
-      width: 175px;
+      height: 50px;
+      width: 350px;
       text-align: center;
       background-color: #eeeeee;
       border: 2px solid #ffb741;
       border-radius: 4px;
       padding-left: 7px;
+      font-size: 20pt;
     }
   }
 
   .implant-label-container {
     text-align: center;
-    padding: 4% 0 0 0%;
+    padding: 4% 0 0 2%;
+    float:left;
 
     >#implant-input {
       color: #bfbfbf;
-      height: 28px;
-      width: 35px;
+      height: 50px;
+      width: 53px;
       text-align: center;
       background-color: #eeeeee;
       border: 2px solid #ffb741;
       border-radius: 4px;
+      padding-left: 7px;
+      font-size: 20pt;
     }
   }
 
@@ -353,37 +316,223 @@ and (orientation: portrait){
       color: white;
       text-align: center;
       font-size: 15pt;
-      margin-top: 48%;
-      margin-left: 30%;
+      margin-top: 37%;
+      margin-left: 38%;
       padding: 1% 1% 1% 1%;
       border: 1px solid #f0ab3d;
       box-shadow: 0px 3px 3px #bfbfbf;
     }
-    #next-label {
-      padding-top: 4%;
-      padding-left: 12%;
-      display: inline-block;
-      vertical-align: top;
-      width: 120px;
+    .inner {
+      width: 150px;
 
-    }
-    #arrow-icon {
-      display: inline-block;
-      font-size: 155%;
-      vertical-align: top;
+      >#next-label {
+        padding-top: 5%;
+        padding-left: 13%;
+        display: inline-block;
+        vertical-align: top;
+        width: 94px;
+      }
+
+      >#arrow-icon {
+        display: inline-block;
+        font-size: 155%;
+        vertical-align: top;
+        padding-top: 2%;
+      }
     }
   }
 }
 
-/* Smartphones iPhone 6 and higher (landscape) ----------- */
+/* Landscape */
+
+/* Large mobile devices incl iPhone 6 and 7 & tablets*/
 @media only screen
-and (max-width : 667px)
-and (orientation: landscape) {
+and (min-width : 569px) and (max-width: 737px)
+and (orientation: landscape){
+  #home-title {
+    padding-top: 5%;
+    text-align:center;
+    color: #ffb741;
+    width: 90%;
+    padding-left: 13%;
+    font-family: Arial;
+    font-size: 13pt;
+    >.first {
+
+    }
+    >.second {
+      font-weight: bold;
+    }
+  }
+
+  .nhs-number-container {
+    text-align: center;
+    padding-top: 4%;
+    padding-left: 36%;
+    float:left;
+
+    >#ci-number {
+      color: #bfbfbf;
+      height: 40px;
+      width: 140px;
+      text-align: center;
+      background-color: #eeeeee;
+      border: 2px solid #ffb741;
+      border-radius: 4px;
+      padding-left: 7px;
+      font-size: 10pt;
+    }
+  }
+
+  .implant-label-container {
+    text-align: center;
+    padding: 4% 0 0 2%;
+    float:left;
+
+    >#implant-input {
+      color: #bfbfbf;
+      height: 40px;
+      width: 40px;
+      text-align: center;
+      background-color: #eeeeee;
+      border: 2px solid #ffb741;
+      border-radius: 4px;
+      font-size: 10pt;
+    }
+  }
+
+  .container {
+    #next-button {
+      background-color: #f0ab3d;
+      color: white;
+      text-align: center;
+      font-size: 12pt;
+      margin-left: 39%;
+      margin-top: 8%;
+      padding: 1% 1% 1% 1%;
+      border: 1px solid #f0ab3d;
+      box-shadow: 0px 3px 3px #bfbfbf;
+    }
+    .inner {
+      width: 150px;
+
+      >#next-label {
+        padding-top: 4%;
+        padding-left: 12%;
+        display: inline-block;
+        vertical-align: top;
+        width: 94px;
+      }
+
+      >#arrow-icon {
+        display: inline-block;
+        font-size: 155%;
+        vertical-align: top;
+        padding-top: 2%;
+      }
+    }
+  }
+}
+
+@media only screen
+and (max-width: 568px)
+and (orientation: landscape){
+  #home-title {
+    padding-top: 3%;
+    text-align:center;
+    color: #ffb741;
+    width: 90%;
+    padding-left: 10%;
+    font-family: Arial;
+    font-size: 10pt;
+    >.first {
+
+    }
+    >.second {
+      font-weight: bold;
+    }
+  }
+
+  .nhs-number-container {
+    text-align: center;
+    padding-top: 4%;
+    padding-left: 35%;
+    float:left;
+
+    >#ci-number {
+      color: #bfbfbf;
+      height: 35px;
+      width: 120px;
+      text-align: center;
+      background-color: #eeeeee;
+      border: 2px solid #ffb741;
+      border-radius: 4px;
+      padding-left: 7px;
+      font-size: 9pt;
+    }
+  }
+
+  .implant-label-container {
+    text-align: center;
+    padding: 4% 0 0 2%;
+    float:left;
+
+    >#implant-input {
+      color: #bfbfbf;
+      height: 35px;
+      width: 35px;
+      text-align: center;
+      background-color: #eeeeee;
+      border: 2px solid #ffb741;
+      border-radius: 4px;
+      padding-left: 7px;
+      font-size: 9pt;
+    }
+  }
+
+  .container {
+    #next-button {
+      background-color: #f0ab3d;
+      color: white;
+      text-align: center;
+      font-size: 12pt;
+      margin-left: 38%;
+      margin-top: 6%;
+      padding: 1% 1% 1% 1%;
+      border: 1px solid #f0ab3d;
+      box-shadow: 0px 3px 3px #bfbfbf;
+    }
+    .inner {
+      width: 130px;
+
+      >#next-label {
+        padding-top: 4%;
+        padding-left: 12%;
+        display: inline-block;
+        vertical-align: top;
+        width: 94px;
+      }
+
+      >#arrow-icon {
+        display: inline-block;
+        font-size: 155%;
+        vertical-align: top;
+        padding-top: 2%;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1024px) and (orientation: landscape) {
+
   #home-title {
     padding-top: 5%;
     text-align: center;
     color: #ffb741;
+    width: 90%;
+    padding-left: 13%;
     font-family: Arial;
+    font-size: 25pt;
     > .first {
 
     }
@@ -395,204 +544,74 @@ and (orientation: landscape) {
   .nhs-number-container {
     text-align: center;
     padding-top: 4%;
-    padding-left: 31%;
+    padding-left: 32%;
     float: left;
 
     > #ci-number {
       color: #bfbfbf;
-      height: 28px;
-      width: 175px;
+      height: 60px;
+      width: 300px;
       text-align: center;
       background-color: #eeeeee;
       border: 2px solid #ffb741;
       border-radius: 4px;
       padding-left: 7px;
+      font-size: 20pt;
     }
   }
 
   .implant-label-container {
     text-align: center;
-    padding: 4% 0 0 4%;
+    padding: 4% 0 0 2%;
     float: left;
 
     > #implant-input {
       color: #bfbfbf;
-      height: 28px;
-      width: 35px;
+      height: 60px;
+      width: 60px;
       text-align: center;
       background-color: #eeeeee;
       border: 2px solid #ffb741;
       border-radius: 4px;
+      font-size: 20pt;
     }
   }
 
   .container {
     #next-button {
-      width: 33%;
       background-color: #f0ab3d;
       color: white;
       text-align: center;
-      font-size: 23pt;
-      margin-top: 15%;
-      margin-left: 34%;
+      font-size: 20pt;
+      margin-left: 38%;
+      margin-top: 18%;
       padding: 1% 1% 1% 1%;
       border: 1px solid #f0ab3d;
-      box-shadow:0px 3px 3px #bfbfbf;
+      box-shadow: 0px 3px 3px #bfbfbf;
     }
-    #next-label {
-      padding-top: 3%;
-      display: inline-block;
-      vertical-align: top;
-      width: 120px;
+    .inner {
+      width: 220px;
 
-    }
-    #arrow-icon {
-      display: inline-block;
-      font-size: 155%;
-      vertical-align: top;
-    }
-  }
-}
+      > #next-label {
+        padding-top: 3%;
+        padding-left: 12%;
+        display: inline-block;
+        vertical-align: top;
+        width: 135px;
+        font-size: 25pt;
+      }
 
-
-/* iPads (landscape) ----------- */
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
-and (orientation : landscape) {
-
-  #home-title {
-    padding-top: 5%;
-    text-align: center;
-    font-size: 23pt;
-    color: #ffb741;
-    font-family: Arial;
-    padding-bottom: 6%;
-    > .first {
-
-    }
-    > .second {
-      font-weight: bold;
-    }
-  }
-
-  .nhs-number-container {
-    text-align: center;
-    padding-left: 34%;
-    float: left;
-
-    > #ci-number {
-      color: #bfbfbf;
-      height: 48px;
-      width: 275px;
-      font-size: 23pt;
-      text-align: center;
-      background-color: #eeeeee;
-      border: 2px solid #ffb741;
-      border-radius: 4px;
-      padding-left: 7px;
-    }
-  }
-
-  .implant-label-container {
-    text-align: center;
-    float: left;
-    margin-left: 4px;
-
-    > #implant-input {
-      color: #bfbfbf;
-      height: 48px;
-      width: 55px;
-      font-size: 18pt;
-      text-align: center;
-      background-color: #eeeeee;
-      border: 2px solid #ffb741;
-      border-radius: 4px;
-    }
-  }
-
-  .container {
-    #next-button {
-      width: 33%;
-      background-color: #f0ab3d;
-      color: white;
-      text-align: center;
-      font-size: 23pt;
-      margin-top: 15%;
-      margin-left: 34%;
-      padding: 1% 1% 1% 1%;
-      border: 1px solid #f0ab3d;
-      box-shadow:0px 3px 3px #bfbfbf;
-    }
-    #next-label {
-      padding-top: 3%;
-      display: inline-block;
-      vertical-align: top;
-      width: 120px;
-
-    }
-    #arrow-icon {
-      display: inline-block;
-      font-size: 155%;
-      vertical-align: top;
+      > #arrow-icon {
+        display: inline-block;
+        font-size: 155%;
+        vertical-align: top;
+        padding-top: 2%;
+      }
     }
   }
 }
 
-/* iPads (portrait) ----------- */
-@media only screen
-and (min-device-width : 690px)
-and (max-device-width : 1024px)
-and (orientation : portrait) {
-  .header {
-    background-color: orange;
-    background-color: #ffb741;
-    color:white;
-    height: 7%;
-    font-size: 25pt;
-    text-align: center;
-    padding-top: 14px;
-
-    >.inner-text {
-      font-weight: bold;
-    }
-  }
-}
-
-/* abnormal-sized devices (portrait) ----------- */
-@media only screen
-and (max-device-width : 310px)
-and (orientation : portrait) {
-  .header {
-    background-color: orange;
-    background-color: #ffb741;
-    color:white;
-    height: 10%;
-    font-size: 15pt;
-    text-align: center;
-    padding-top: 7px;
-
-    >.inner-text {
-      font-weight: bold;
-    }
-  }
-}
-
-/* abnormal-sized devices (landscape) ----------- */
-@media only screen
-and (min-device-width : 310px)
-and (orientation : landscape) {
-  .header {
-    background-color: orange;
-    background-color: #ffb741;
-    color:white;
-    height: 13%;
-    font-size: 15pt;
-    text-align: center;
-    padding-top: 8px;
-
-    >.inner-text {
-      font-weight: bold;
-    }
-  }
+input:focus {
+  color: #a3a3a3;
+  font-weight:bold;
 }

@@ -1,124 +1,6 @@
-/*
-.step-counter-container {
-  position: absolute;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-
-  .step-counter {
-    position: relative;
-    max-width: 400px;
-    margin: auto;
-    display: block;
-
-    &:before {
-      content: '';
-      background-color: $secondary-color;
-      display: block;
-      margin: auto;
-      margin-bottom: 40px;
-      width: calc(100% - 110px);
-      height: 14px;
-    }
-
-    .steps {
-      position: absolute;
-      top: -18px;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      padding: 0;
-      width: calc(100% - 110px);
-      margin: 0 55px;
-
-      li {
-        list-style-type: none;
-        position: absolute;
-        height: 50px;
-        width: 50px;
-        border-radius: 50%;
-        background-color: $white-color;
-        border: 3px solid $primary-color;
-
-        &.active {
-          background-color: $primary-color;
-
-          .label {
-            color: $white-color;
-          }
-        }
-
-        .label {
-          color: $primary-color;
-          position: absolute;
-          line-height: 50px - 2 * 3px;
-          width: 100%;
-          text-align: center;
-          font-size: 26px;
-        }
-      }
-
-      .steps-first {
-        left: -25px;
-      }
-
-      .steps-second {
-        left: calc(33% - 25px);
-      }
-
-      .steps-third {
-        right: calc(33% - 25px);
-      }
-
-      .steps-fourth {
-        right: -25px;
-      }
-    }
-  }
-}*/
-
-
-
-/* Smartphones (landscape) ----------- */
+/* iPhone 5 (Portrait) */
 @media only screen
-and (min-width : 376px) {
-  .header {
-    background-color: orange;
-    background-color: #ffb741;
-    color:white;
-    height: 14%;
-    font-size: 18pt;
-    text-align: center;
-    padding-top: 9px;
-
-    >.inner-text {
-      font-weight: bold;
-    }
-  }
-}
-
-//Iphone 6 and 7 landscape
-@media only screen
-and (min-width : 736px) {
-  .header {
-    background-color: orange;
-    background-color: #ffb741;
-    color:white;
-    height: 14%;
-    font-size: 18pt;
-    text-align: center;
-    padding-top: 14px;
-
-    >.inner-text {
-      font-weight: bold;
-    }
-  }
-}
-
-/* Smartphones (portrait) sizes smaller than iPhone 5 view */
-
-@media only screen
-and (max-width : 568px) {
+and (max-width : 320px) {
   .step-counter-container {
     position: absolute;
     width: 100%;
@@ -198,49 +80,9 @@ and (max-width : 568px) {
   }
 }
 
-/* Smartphones (landscape) sizes smaller than iPhone 5 view */
+/* all devices between iPhone 5 and 6 incl iPhone 6 and 7 (Portrait) */
 @media only screen
-and (min-width : 568px) and (max-width: 500px) {
-  .header {
-    background-color: orange;
-    background-color: #ffb741;
-    color:white;
-    height: 12%;
-    font-size: 15pt;
-    text-align: center;
-    padding-top: 4px;
-
-    >.inner-text {
-      font-weight: bold;
-    }
-  }
-}
-
-/* iPads ---------- */
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen
-and (min-device-width : 501px)
-and (max-device-width : 1024px) {
-  .header {
-    background-color: orange;
-    background-color: #ffb741;
-    color:white;
-    height: 7%;
-    font-size: 27pt;
-    text-align: center;
-    padding-top: 14px;
-
-    >.inner-text {
-      font-weight: bold;
-    }
-  }
-}
-
-/* iPads (landscape) ----------- */
-@media only screen
-and (min-device-width : 1024px)
-and (orientation : landscape) {
+and (min-width : 320px) and (max-width: 414px) {
   .step-counter-container {
     position: absolute;
     width: 100%;
@@ -258,14 +100,14 @@ and (orientation : landscape) {
         background-color: $secondary-color;
         display: block;
         margin: auto;
-        margin-bottom: 80px;
+        margin-bottom: 32px;
         width: calc(100% - 110px);
-        height: 18px;
+        height: 14px;
       }
 
       .steps {
         position: absolute;
-        top: -25px;
+        top: -14px;
         left: 0;
         height: 100%;
         width: 100%;
@@ -276,8 +118,8 @@ and (orientation : landscape) {
         li {
           list-style-type: none;
           position: absolute;
-          height: 70px;
-          width: 70px;
+          height: 40px;
+          width: 40px;
           border-radius: 50%;
           background-color: $white-color;
           border: 3px solid $primary-color;
@@ -293,7 +135,7 @@ and (orientation : landscape) {
           .label {
             color: $primary-color;
             position: absolute;
-            line-height: 70px - 2 * 3px;
+            line-height: 35px;
             width: 100%;
             text-align: center;
             font-size: 26px;
@@ -305,11 +147,11 @@ and (orientation : landscape) {
         }
 
         .steps-second {
-          left: calc(31% - 25px);
+          left: calc(35% - 25px);
         }
 
         .steps-third {
-          right: calc(30% - 25px);
+          right: calc(33% - 25px);
         }
 
         .steps-fourth {
@@ -320,11 +162,10 @@ and (orientation : landscape) {
   }
 }
 
-/* iPads (portrait) ----------- */
+/* Tablets (Portrait) */
+/* all devices between iPhone 5 and 6 incl iPhone 6 and 7 (Portrait) */
 @media only screen
-and (min-device-width : 690px)
-and (max-device-width : 1023px)
-and (orientation : portrait) {
+and (min-width : 415px) and (max-width: 1024px) {
   .step-counter-container {
     position: absolute;
     width: 100%;
@@ -333,7 +174,7 @@ and (orientation : portrait) {
 
     .step-counter {
       position: relative;
-      max-width: 500px;
+      max-width: 400px;
       margin: auto;
       display: block;
 
@@ -342,14 +183,14 @@ and (orientation : portrait) {
         background-color: $secondary-color;
         display: block;
         margin: auto;
-        margin-bottom: 80px;
+        margin-bottom: 32px;
         width: calc(100% - 110px);
-        height: 18px;
+        height: 14px;
       }
 
       .steps {
         position: absolute;
-        top: -18px;
+        top: -14px;
         left: 0;
         height: 100%;
         width: 100%;
@@ -360,8 +201,8 @@ and (orientation : portrait) {
         li {
           list-style-type: none;
           position: absolute;
-          height: 50px;
-          width: 50px;
+          height: 40px;
+          width: 40px;
           border-radius: 50%;
           background-color: $white-color;
           border: 3px solid $primary-color;
@@ -377,7 +218,7 @@ and (orientation : portrait) {
           .label {
             color: $primary-color;
             position: absolute;
-            line-height: 50px - 2 * 3px;
+            line-height: 35px;
             width: 100%;
             text-align: center;
             font-size: 26px;
@@ -389,11 +230,11 @@ and (orientation : portrait) {
         }
 
         .steps-second {
-          left: calc(32% - 25px);
+          left: calc(35% - 25px);
         }
 
         .steps-third {
-          right: calc(35% - 25px);
+          right: calc(33% - 25px);
         }
 
         .steps-fourth {
@@ -403,4 +244,5 @@ and (orientation : portrait) {
     }
   }
 }
+
 
