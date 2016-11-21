@@ -1,8 +1,117 @@
-.header {
-  background-color: $primary-color;
-  color: $secondary-color;
-  height: 60px;
-  font-size: 18px;
-  text-align: center;
-  padding-top: 7px;
+/* Smartphones (landscape) ----------- */
+@media only screen
+and (min-width : 376px) {
+  .header {
+    background-color: orange;
+    background-color: #ffb741;
+    color:white;
+    height: 14%;
+    font-size: 18pt;
+    text-align: center;
+    padding-top: 9px;
+
+    >.inner-text {
+      font-weight: bold;
+    }
+  }
+}
+
+
+/* Smartphones (portrait) ----------- */
+@media only screen
+and (max-width : 414px) {
+  .header {
+    background-color: orange;
+    background-color: #ffb741;
+    color:white;
+    height: 7%;
+    font-size: 15pt;
+    text-align: center;
+    padding-top: 10px;
+
+    >.inner-text {
+      font-weight: bold;
+    }
+  }
+}
+
+
+
+
+/* iPads (landscape) ----------- */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+and (orientation : landscape) {
+  .header {
+    background-color: orange;
+    background-color: #ffb741;
+    color:white;
+    height: 12%;
+    font-size: 27pt;
+    text-align: center;
+    padding-top: 20px;
+
+    >.inner-text {
+      font-weight: bold;
+    }
+  }
+}
+
+/* iPads (portrait) ----------- */
+@media only screen
+and (min-device-width : 690px)
+and (max-device-width : 1024px)
+and (orientation : portrait) {
+  .header {
+    background-color: orange;
+    background-color: #ffb741;
+    color:white;
+    height: 7%;
+    font-size: 25pt;
+    text-align: center;
+    padding-top: 14px;
+
+    >.inner-text {
+      font-weight: bold;
+    }
+  }
+}
+
+/* abnormal-sized devices (portrait) ----------- */
+@media only screen
+and (max-device-width : 310px)
+and (orientation : portrait) {
+  .header {
+    background-color: orange;
+    background-color: #ffb741;
+    color:white;
+    height: 13%;
+    font-size: 15pt;
+    text-align: center;
+    padding-top: 7px;
+
+    >.inner-text {
+      font-weight: bold;
+    }
+  }
+}
+
+/* abnormal-sized devices (landscape) ----------- */
+@media only screen
+and (min-device-width : 1024px)
+and (orientation : landscape) {
+  .header {
+    background-color: orange;
+    background-color: #ffb741;
+    color:white;
+    height: 10%;
+    font-size: 23pt;
+    text-align: center;
+    padding-top: 14px;
+
+    >.inner-text {
+      font-weight: bold;
+    }
+  }
 }

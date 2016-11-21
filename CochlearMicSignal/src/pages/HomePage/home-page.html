@@ -2,13 +2,22 @@
   <app-header></app-header>
   <div class="container">
     <h4 id="home-title">
-      <span class="first">Please insert your </span>
-      <span class="second">NHS </span><span>#</span>
+      <span class="first">Please enter your </span>
+      <span class="second">CI </span><span>number followed by your Implant label.</span>
     </h4>
-    <div class="nhs-number-container">
-        <input id="input" placeholder="eg. 943 476 5946" />
-    </div>
+      <div class="nhs-number-container">
+        <input id="ci-number" placeholder="eg. 943 476 5946" />
+      </div>
+      <div class="implant-label-container">
+        <input id="implant-input" placeholder="L" />
+      </div>
+    <button id="next-button" (click)="proceedToTest()">
+      <div class="inner" center>
+        <span id="next-label">{{buttonName}}
+        </span>
+        <ion-icon id="arrow-icon" name="md-arrow-round-forward"></ion-icon>
+      </div>
+    </button>
   </div>
-  <next-button></next-button>
   <app-footer></app-footer>
 </ion-content>
