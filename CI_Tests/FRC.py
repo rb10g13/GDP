@@ -1,11 +1,13 @@
 from tone import play_tone, record
 from threading import Thread
+import tone
 
 import numpy as np
 import pandas as pd
 import random
 import wave
 import matplotlib.pyplot as pl
+from scipy.spatial import distance
 
 
 # NEEDS TO BE SEEDED TO REMOVE RANDOMNESS
@@ -54,8 +56,6 @@ def pink_noise(start, stop, power=-1, chunk=4096, sample_rate=44100, seed = 999)
             out[i] = (power*random.random()) / freq
     return out
 
-
-
 def freq_resp_curve(soundData, sample_rate=44100, chunk=4096):
 
     timeArray = np.arange(0, soundData.shape[0], 1)
@@ -92,10 +92,31 @@ def freq_resp_curve(soundData, sample_rate=44100, chunk=4096):
     pl.show()
 
 
+
+def overlap(samples, sample_rate=44100, duration=5):
+    mse = []
+    for i in range(sample_rate):
+        sound_clips = []
+        for d in range(duration):
+            # Chuck away the incomplete array
+            if not ((d+1)*sample_rate)+i+sample_rate > len(samples):
+                sound_clips.append(samples[range(((d+1)*sample_rate)+i,(((d+1)*sample_rate)+i+sample_rate))])
+
+        dist = []
+        for x in range(len(sound_clips)):
+            dist.append(pow(sound_clips[0][x] - sound_clips[1][x], 2))
+
+        mse.append(sum(dist))
+    print(mse)
+
+
 samples = voss(44100)
-freq_resp_curve(samples)
 
 
-# This dosen't deal with return values... just throws them away
-Thread(target= record()).start()
-Thread(target = play_tone(samples)).start()
+#Thread(target=play_tone(samples)).start()
+rec_samples = record()
+flattened = [x for sublist in rec_samples for x in sublist]
+#print(len(flattened))
+freq_resp_curve(np.array(flattened))
+#overlap(np.array(flattened))
+

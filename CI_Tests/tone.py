@@ -1,21 +1,23 @@
 import pyaudio
 import numpy as np
+import wave
 
-def play_tone(sample, sample_rate=44100):
+def play_tone(sample, sample_rate=44100, duration=1):
     p = pyaudio.PyAudio()
     stream = p.open(format=pyaudio.paFloat32,
                     channels=1,
                     rate=sample_rate,
                     output=True)
 
+    for i in range(duration):
+        stream.write(sample)
 
-    stream.write(sample)
     stream.stop_stream()
     stream.close()
     p.terminate()
 
 
-def record(sample_rate=44100, chunk=4096, duration=1):
+def record(sample_rate=44100, chunk=4096, duration=5):
 
     p = pyaudio.PyAudio()
 
@@ -47,6 +49,4 @@ def record(sample_rate=44100, chunk=4096, duration=1):
         dec_frames.append(np.fromstring(frames[i], np.int16))
 
     return np.array(dec_frames)
-
-
 
