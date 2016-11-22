@@ -110,10 +110,21 @@ def overlap(samples, sample_rate=44100, duration=5):
     print(mse)
 
 
+def overlap2(original_samples, recorded_samples, sample_rate=44100):
+    mse = []
+    point_difference = np.zeros(sample_rate)
+    for i in range(sample_rate):
+        point_1 = recorded_samples[i]
+        for j in range(sample_rate):
+            point_2 = original_samples[i]
+            point_difference[j] += (pow(point_2-point_1,2))
+
+
+
 samples = voss(44100)
 
 
-#Thread(target=play_tone(samples)).start()
+Thread(target=play_tone(samples)).start()
 rec_samples = record()
 flattened = [x for sublist in rec_samples for x in sublist]
 #print(len(flattened))
