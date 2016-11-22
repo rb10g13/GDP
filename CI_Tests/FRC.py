@@ -113,9 +113,9 @@ def overlap(samples, sample_rate=44100, duration=5):
 def overlap2(original_samples, recorded_samples, sample_rate=44100):
     point_difference = np.zeros(sample_rate)
     for i in range(sample_rate):
-        point_1 = recorded_samples[i]
+        point_1 = original_samples[i]
         for j in range(sample_rate):
-            point_2 = original_samples[i]
+            point_2 = recorded_samples[i+j]
             point_difference[j] += (pow(point_2-point_1,2))
 
     pl.plot(point_difference)
