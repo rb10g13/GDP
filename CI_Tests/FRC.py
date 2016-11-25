@@ -110,7 +110,6 @@ def overlap(samples, sample_rate=44100, duration=5):
 
 
 def overlap2(original_samples, recorded_samples, sample_rate=44100):
-<<<<<<< HEAD
 #    point_difference = np.zeros(sample_rate)
 #    for i in range(sample_rate):
 #        point_1 = original_samples[i]
@@ -118,19 +117,9 @@ def overlap2(original_samples, recorded_samples, sample_rate=44100):
 #            point_2 = recorded_samples[i+j]
 #            point_difference[j] += (pow(point_2-point_1,2))
     point_difference = np.correlate(original_samples[range(sample_rate)],recorded_samples[range(sample_rate)],'full')
-=======
-    point_difference = np.zeros(sample_rate)
-    for i in range(sample_rate):
-        point_1 = original_samples[i]
-        for j in range(sample_rate):
-            point_2 = recorded_samples[i+j]
-            point_difference[j] += (pow(point_2-point_1,2))
->>>>>>> 2ce06aad34d85a24389a21e5f02e1048887cd24d
-
     pl.plot(point_difference)
     pl.show()
 
-<<<<<<< HEAD
 
 
 if __name__ == '__main__':
@@ -146,20 +135,4 @@ if __name__ == '__main__':
     pl.show()
     overlap2(samples, np.array(flattened))
 
-
-
-
-#print(len(flattened))
-=======
-samples = voss(44100)
-
-
-Thread(target=play_tone(samples)).start()
-rec_samples = record()
-flattened = [x for sublist in rec_samples for x in sublist]
-#print(len(flattened))
-overlap2(samples, flattened)
->>>>>>> 2ce06aad34d85a24389a21e5f02e1048887cd24d
-#freq_resp_curve(np.array(flattened))
-#overlap(np.array(flattened))
 
