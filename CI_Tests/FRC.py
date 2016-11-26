@@ -1,5 +1,5 @@
 from tone import play_tone, record
-from threading import Thread
+from multiprocessing import Process, Queue
 import tone
 
 import numpy as np
@@ -7,8 +7,7 @@ import pandas as pd
 import random
 import wave
 import matplotlib.pyplot as pl
-from scipy.spatial import distance
-
+from scipy.signal import chirp
 
 # NEEDS TO BE SEEDED TO REMOVE RANDOMNESS
 def voss(nrows, ncols=16):
@@ -38,7 +37,7 @@ def voss(nrows, ncols=16):
     return total.values
 
 
-def pink_noise(start, stop, power=-1, chunk=4096, sample_rate=44100, seed = 999):
+def pink_noise(start, stop, power=-1, chunk=4096, sample_rate=16000, seed = 999):
     random.seed(seed)
 
     # limit upper bound of stop
@@ -111,24 +110,29 @@ def overlap(samples, sample_rate=44100, duration=5):
 
 
 def overlap2(original_samples, recorded_samples, sample_rate=44100):
-    point_difference = np.zeros(sample_rate)
-    for i in range(sample_rate):
-        point_1 = original_samples[i]
-        for j in range(sample_rate):
-            point_2 = recorded_samples[i+j]
-            point_difference[j] += (pow(point_2-point_1,2))
-
+#    point_difference = np.zeros(sample_rate)
+#    for i in range(sample_rate):
+#        point_1 = original_samples[i]
+#        for j in range(sample_rate):
+#            point_2 = recorded_samples[i+j]
+#            point_difference[j] += (pow(point_2-point_1,2))
+    point_difference = np.correlate(original_samples[range(sample_rate)],recorded_samples[range(sample_rate)],'full')
     pl.plot(point_difference)
     pl.show()
 
-samples = voss(44100)
 
 
-Thread(target=play_tone(samples)).start()
-rec_samples = record()
-flattened = [x for sublist in rec_samples for x in sublist]
-#print(len(flattened))
-overlap2(samples, flattened)
-#freq_resp_curve(np.array(flattened))
-#overlap(np.array(flattened))
+if __name__ == '__main__':
+    queue = Queue()
+    samples = voss(44100)
+
+    #t = np.linspace(0, 10, 44100)
+    #samples = chirp(t, f0=12.5, f1=2.5, t1=10, method='linear')
+    #Process(target=play_tone, args=(samples,)).start()
+    Process(target=record, args=(queue,)).start()
+    flattened = [x for sublist in queue.get() for x in sublist]
+    pl.plot(flattened)
+    pl.show()
+    overlap2(samples, np.array(flattened))
+
 
