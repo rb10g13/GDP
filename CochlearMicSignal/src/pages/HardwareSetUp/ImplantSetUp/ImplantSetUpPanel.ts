@@ -1,7 +1,7 @@
 import { NavController } from 'ionic-angular';
-import {Component, OnInit} from '@angular/core';
-import {BeginTest} from "../../Test/BeginTest/BeginTest";
-import {BeginTestService} from "../../Test/BeginTest/BeginTestService.service";
+import { Component, OnInit } from '@angular/core';
+import { MobileSetUpPanel } from "../MobileSetUp/MobileSetUpPanel";
+import { BeginTestService } from "../../Test/BeginTest/BeginTestService.service";
 
 @Component({
   templateUrl: 'implant-page.html'
@@ -9,7 +9,7 @@ import {BeginTestService} from "../../Test/BeginTest/BeginTestService.service";
 
 export class ImplantSetUpPanel implements OnInit{
 
-  buttonName:String = "stop loading";
+  buttonName:String = "next";
 
   ngOnInit() {
     this.service.pageNumber = 2;
@@ -19,7 +19,7 @@ export class ImplantSetUpPanel implements OnInit{
 
   }
 
-  stopLoading() {
-    this.nav.setRoot(BeginTest, {}, {animate: true, direction: 'left'});
+  nextPage() {
+    this.nav.setRoot(MobileSetUpPanel, {}, {animate: true, direction: 'left'});
   }
 }

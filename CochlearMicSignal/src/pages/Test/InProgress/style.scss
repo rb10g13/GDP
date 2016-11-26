@@ -1,29 +1,26 @@
 progress {
   display: block;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 70%;
-  height: 60px;
+  width: 100%;
+  height: 50px;
   margin: 15px auto;
   padding: 4px;
-  border:4px solid #ffb741;
+  border: 3px solid $primary-color;
+  border-radius: 3px;
+
+  &::-webkit-progress-bar {
+    background-color: white;
+  }
+
+  &::-webkit-progress-value {
+    background-color: $secondary-color;
+  }
 }
 
-progress::-webkit-progress-bar {
-  background-color: white;
-}
-
-progress::-webkit-progress-value {
-  background-color: #fed450;
-}
-
-.progress-label {
-  padding-top: 55%;
-  font-size: 18pt;
-  font-weight: bold;
-  padding-bottom: 5%;
-  text-align:center;
-  color: #ffb741;
-  font-family: Arial;
+#content {
+  width: 100%;
+  max-width: 260px;
+  position: absolute !important;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
 }

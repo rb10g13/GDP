@@ -1,8 +1,10 @@
 <ion-content>
   <app-header></app-header>
-  <div class="progress-label">Test in progress...</div>
-  <progress value="40" max="100"></progress>
   <button (click)="proceedToSuccessPanel()">Temp button(Success)</button>
   <button (click)="proceedToFailurePanel()">Temp button(Failure)</button>
-  <app-footer></app-footer>
+  <div id="content">
+    <h2>Test in progress...</h2>
+    <progress value="40" max="100"></progress>
+  </div>
+  <app-step-counter></app-step-counter>
 </ion-content>

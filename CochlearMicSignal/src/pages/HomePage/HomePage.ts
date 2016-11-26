@@ -11,6 +11,12 @@ export class HomePage implements OnInit{
 
   buttonName:String = "Next";
 
+  labelClick(label) {
+      document.querySelector('.'+label+'ToggleButton').classList.toggle('active');
+
+      document.querySelector('.'+(label === 'right' ? 'left' : 'right')+'ToggleButton').classList.remove('active');
+  }
+
   ngOnInit() {
     this.service.pageNumber = 1;
   }

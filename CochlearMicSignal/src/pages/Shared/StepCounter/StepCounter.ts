@@ -1,13 +1,13 @@
 import { NavController } from 'ionic-angular';
-import {Component, OnInit} from '@angular/core';
-import {BeginTestService} from "../../Test/BeginTest/BeginTestService.service";
+import { Component, OnInit } from '@angular/core';
+import { BeginTestService } from "../../Test/BeginTest/BeginTestService.service";
 
 @Component({
-  templateUrl: 'footer.html',
-  selector: 'app-footer'
+  templateUrl: 'stepCounter.html',
+  selector: 'app-step-counter'
 })
 
-export class Footer implements OnInit{
+export class StepCounter implements OnInit{
 
   firstActive: string = '';
   secondActive: string = '';
@@ -34,8 +34,5 @@ export class Footer implements OnInit{
     }
   }
 
-  constructor(public navCtrl: NavController, public service: BeginTestService) {
-
-  }
-
+  constructor(public navCtrl: NavController, public service: BeginTestService) {}
 }

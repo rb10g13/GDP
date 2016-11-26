@@ -1,10 +1,8 @@
 <ion-content>
   <app-header></app-header>
-  <button id="beginTest-button" (click)="beginTest()">
-    <div class="label-arrow" center>
-      <span id="beginTest-label">{{buttonName}}</span>
-      <span id="arrow"><ion-icon id="arrow-icon" name="md-arrow-round-forward"></ion-icon></span>
-    </div>
+  <button ion-button id="beginButton" class="primaryButton" (click)="beginTest()">
+    <span class="label">{{buttonName}}</span>
+    <i class="icon-left fa fa-play"></i>
   </button>
-  <app-footer></app-footer>
+  <app-step-counter></app-step-counter>
 </ion-content>
