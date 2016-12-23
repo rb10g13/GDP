@@ -1,13 +1,12 @@
 from tone import play_tone, record
 from multiprocessing import Process, Queue
-import tone
 
 import numpy as np
 import pandas as pd
 import random
 import wave
 import matplotlib.pyplot as pl
-from scipy.signal import chirp
+
 
 # NEEDS TO BE SEEDED TO REMOVE RANDOMNESS
 def voss(nrows, ncols=16):
@@ -18,17 +17,20 @@ def voss(nrows, ncols=16):
 
     returns: NumPy array
     """
+
+    seeded = np.random.RandomState(seed=999)
+
     array = np.empty((nrows, ncols))
     array.fill(np.nan)
-    array[0, :] = np.random.random(ncols)
-    array[:, 0] = np.random.random(nrows)
+    array[0, :] = seeded.random_sample(size=ncols)
+    array[:, 0] = seeded.random_sample(size=nrows)
 
     # the total number of changes is nrows
     n = nrows
-    cols = np.random.geometric(0.5, n)
+    cols = seeded.geometric(0.5, n)
     cols[cols >= ncols] = 0
-    rows = np.random.randint(nrows, size=n)
-    array[rows, cols] = np.random.random(n)
+    rows = seeded.randint(nrows, size=n)
+    array[rows, cols] = seeded.random_sample(n)
 
     df = pd.DataFrame(array)
     df.fillna(method='ffill', axis=0, inplace=True)
@@ -37,26 +39,7 @@ def voss(nrows, ncols=16):
     return total.values
 
 
-def pink_noise(start, stop, power=-1, chunk=4096, sample_rate=16000, seed = 999):
-    random.seed(seed)
-
-    # limit upper bound of stop
-    if stop > (sample_rate/2):
-        stop = sample_rate/2
-    # auto calc mult if it is -1 (may need testing)
-    if power == -1:
-        power = 1.7 / (np.log10(stop) - np.log10(start))
-    #generate initial array
-    out = [0] * chunk
-    # populate array
-    for i in range(chunk//2):
-        freq = i*((sample_rate/2) / ((chunk/2)-1))
-        if (freq >= start ) and (freq <= stop):
-            out[i] = (power*random.random()) / freq
-    return out
-
 def freq_resp_curve(soundData, sample_rate=44100, chunk=4096):
-
     timeArray = np.arange(0, soundData.shape[0], 1)
     timeArray = timeArray / sample_rate
     timeArray = timeArray * 1000  # scale to milliseconds
@@ -85,54 +68,39 @@ def freq_resp_curve(soundData, sample_rate=44100, chunk=4096):
         p[1:len(p) - 1] = p[1:len(p) - 1] * 2  # we've got even number of points fft
 
     freqArray = np.arange(0, nUniquePts, 1.0) * (chunk / n);
-    pl.plot(freqArray / 1000, 10 * np.log10(p), color='k')
-    pl.xlabel('Frequency (kHz)')
-    pl.ylabel('Power (dB)')
-    pl.show()
+
+    return [freqArray, p]
+#    pl.plot(freqArray / 1000, 10 * np.log10(p), color='k')
+#    pl.xlabel('Frequency (kHz)')
+#    pl.ylabel('Power (dB)')
+#    pl.show()
 
 
+def pull_recording(recording, sample_rate=44100):
+    start_point = -1
+    for x in range(len(recording)):
+        if recording[x] > 1000:
+            start_point = x
+            break
+    end_point = start_point+sample_rate
+    print(str(end_point-start_point))
 
-def overlap(samples, sample_rate=44100, duration=5):
-    mse = []
-    for i in range(sample_rate):
-        sound_clips = []
-        for d in range(duration):
-            # Chuck away the incomplete array
-            if not ((d+1)*sample_rate)+i+sample_rate > len(samples):
-                sound_clips.append(samples[range(((d+1)*sample_rate)+i,(((d+1)*sample_rate)+i+sample_rate))])
-
-        dist = []
-        for x in range(len(sound_clips)):
-            dist.append(pow(sound_clips[0][x] - sound_clips[1][x], 2))
-
-        mse.append(sum(dist))
-    print(mse)
+    return np.array([recording[x] for x in range(start_point, end_point)])
 
 
-def overlap2(original_samples, recorded_samples, sample_rate=44100):
-#    point_difference = np.zeros(sample_rate)
-#    for i in range(sample_rate):
-#        point_1 = original_samples[i]
-#        for j in range(sample_rate):
-#            point_2 = recorded_samples[i+j]
-#            point_difference[j] += (pow(point_2-point_1,2))
-    point_difference = np.correlate(original_samples[range(sample_rate)],recorded_samples[range(sample_rate)],'full')
-    pl.plot(point_difference)
-    pl.show()
+def main(sample_rate=44100):
+    if __name__ == '__main__':
+        queue = Queue()
+        samples = voss(sample_rate*4)
 
+        # t = np.linspace(0, 10, 44100)
+        # samples = chirp(t, f0=12.5, f1=2.5, t1=10, method='linear')
 
+        Process(target=record, args=(queue,)).start()
+        Process(target=play_tone, args=(samples,)).start()
+        flattened = [x for sublist in queue.get() for x in sublist]
 
-if __name__ == '__main__':
-    queue = Queue()
-    samples = voss(44100)
+        return freq_resp_curve(pull_recording(flattened))
 
-    #t = np.linspace(0, 10, 44100)
-    #samples = chirp(t, f0=12.5, f1=2.5, t1=10, method='linear')
-    #Process(target=play_tone, args=(samples,)).start()
-    Process(target=record, args=(queue,)).start()
-    flattened = [x for sublist in queue.get() for x in sublist]
-    pl.plot(flattened)
-    pl.show()
-    overlap2(samples, np.array(flattened))
 
 
