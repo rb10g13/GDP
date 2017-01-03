@@ -6,6 +6,7 @@ import pandas as pd
 import random
 import wave
 import matplotlib.pyplot as pl
+from scipy.signal import savgol_filter
 
 
 # NEEDS TO BE SEEDED TO REMOVE RANDOMNESS
@@ -44,10 +45,10 @@ def freq_resp_curve(soundData, sample_rate=44100, chunk=4096):
     timeArray = timeArray / sample_rate
     timeArray = timeArray * 1000  # scale to milliseconds
 
-    pl.plot(timeArray, soundData, color='k')
-    pl.ylabel('Amplitude')
-    pl.xlabel('Time (ms)')
-    pl.show()
+    #pl.plot(timeArray, soundData, color='k')
+    #pl.ylabel('Amplitude')
+    #pl.xlabel('Time (ms)')
+    #pl.show()
 
     n = len(soundData)
     p = np.fft.fft(soundData)  # take the fourier transform
@@ -67,13 +68,14 @@ def freq_resp_curve(soundData, sample_rate=44100, chunk=4096):
     else:
         p[1:len(p) - 1] = p[1:len(p) - 1] * 2  # we've got even number of points fft
 
-    freqArray = np.arange(0, nUniquePts, 1.0) * (chunk / n);
+    freqArray = np.arange(0, nUniquePts, 1.0) * (chunk / n)
+    #pl.plot(freqArray / 1000, 10 * np.log10(p), color='k')
+    #pl.xlabel('Frequency (kHz)')
+    #pl.ylabel('Power (dB)')
+    #pl.show()
 
-    return [freqArray, p]
-#    pl.plot(freqArray / 1000, 10 * np.log10(p), color='k')
-#    pl.xlabel('Frequency (kHz)')
-#    pl.ylabel('Power (dB)')
-#    pl.show()
+    return 10 * np.log10(p)
+
 
 
 def pull_recording(recording, sample_rate=44100):
@@ -83,24 +85,46 @@ def pull_recording(recording, sample_rate=44100):
             start_point = x
             break
     end_point = start_point+sample_rate
-    print(str(end_point-start_point))
 
     return np.array([recording[x] for x in range(start_point, end_point)])
 
 
-def main(sample_rate=44100):
-    if __name__ == '__main__':
-        queue = Queue()
-        samples = voss(sample_rate*4)
+def generate_FRC(sample_rate=44100):
+    queue = Queue()
+    samples = voss(sample_rate*4)
 
-        # t = np.linspace(0, 10, 44100)
-        # samples = chirp(t, f0=12.5, f1=2.5, t1=10, method='linear')
+    # t = np.linspace(0, 10, 44100)
+    # samples = chirp(t, f0=12.5, f1=2.5, t1=10, method='linear')
 
-        Process(target=record, args=(queue,)).start()
-        Process(target=play_tone, args=(samples,)).start()
-        flattened = [x for sublist in queue.get() for x in sublist]
+    Process(target=record, args=(queue,)).start()
+    Process(target=play_tone, args=(samples,)).start()
+    flattened = [x for sublist in queue.get() for x in sublist]
 
-        return freq_resp_curve(pull_recording(flattened))
+    frc = freq_resp_curve(pull_recording(flattened))
+    #pl.plot(x[0] / 1000, 10 * np.log10(x[1]), color='k')
+    #pl.xlabel('Frequency (kHz)')
+    #pl.ylabel('Power (dB)')
+    #pl.show()
+    return frc
 
 
+def trim_and_smooth(data, freq_range=range(199,8000), window_size=101, polynomial=1):
+    data_inrange = data[freq_range]
+    return savgol_filter(data_inrange, window_size, polynomial)
 
+
+# BELOW IS JUST TESTING CODE, WILL NEED TO CHANGE!
+import compare
+
+if __name__ == "__main__":
+    x = generate_FRC()
+    x = trim_and_smooth(x)    
+    pl.plot(range(len(x)), x)
+    pl.show()
+
+    y = generate_FRC()
+    y = trim_and_smooth(y)    
+    pl.plot(range(len(y)), y)
+    pl.show()
+    
+    compare.compare(x, y, 100001)
