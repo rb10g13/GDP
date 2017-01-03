@@ -1,5 +1,5 @@
 import { NavController } from 'ionic-angular';
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   templateUrl: 'header.html',
@@ -7,9 +7,5 @@ import {Component} from '@angular/core';
 })
 
 export class Header {
-
-  constructor(public navCtrl: NavController) {
-
-  }
-
+  constructor(public navCtrl: NavController) {}
 }

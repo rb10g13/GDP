@@ -1,5 +1,5 @@
 from tone import play_tone, record
-from threading import Thread
+from multiprocessing import Process, Queue
 
 import numpy as np
 import pandas as pd
@@ -17,17 +17,20 @@ def voss(nrows, ncols=16):
 
     returns: NumPy array
     """
+
+    seeded = np.random.RandomState(seed=999)
+
     array = np.empty((nrows, ncols))
     array.fill(np.nan)
-    array[0, :] = np.random.random(ncols)
-    array[:, 0] = np.random.random(nrows)
+    array[0, :] = seeded.random_sample(size=ncols)
+    array[:, 0] = seeded.random_sample(size=nrows)
 
     # the total number of changes is nrows
     n = nrows
-    cols = np.random.geometric(0.5, n)
+    cols = seeded.geometric(0.5, n)
     cols[cols >= ncols] = 0
-    rows = np.random.randint(nrows, size=n)
-    array[rows, cols] = np.random.random(n)
+    rows = seeded.randint(nrows, size=n)
+    array[rows, cols] = seeded.random_sample(n)
 
     df = pd.DataFrame(array)
     df.fillna(method='ffill', axis=0, inplace=True)
@@ -36,28 +39,7 @@ def voss(nrows, ncols=16):
     return total.values
 
 
-def pink_noise(start, stop, power=-1, chunk=4096, sample_rate=44100, seed = 999):
-    random.seed(seed)
-
-    # limit upper bound of stop
-    if stop > (sample_rate/2):
-        stop = sample_rate/2
-    # auto calc mult if it is -1 (may need testing)
-    if power == -1:
-        power = 1.7 / (np.log10(stop) - np.log10(start))
-    #generate initial array
-    out = [0] * chunk
-    # populate array
-    for i in range(chunk//2):
-        freq = i*((sample_rate/2) / ((chunk/2)-1))
-        if (freq >= start ) and (freq <= stop):
-            out[i] = (power*random.random()) / freq
-    return out
-
-
-
 def freq_resp_curve(soundData, sample_rate=44100, chunk=4096):
-
     timeArray = np.arange(0, soundData.shape[0], 1)
     timeArray = timeArray / sample_rate
     timeArray = timeArray * 1000  # scale to milliseconds
@@ -86,16 +68,39 @@ def freq_resp_curve(soundData, sample_rate=44100, chunk=4096):
         p[1:len(p) - 1] = p[1:len(p) - 1] * 2  # we've got even number of points fft
 
     freqArray = np.arange(0, nUniquePts, 1.0) * (chunk / n);
-    pl.plot(freqArray / 1000, 10 * np.log10(p), color='k')
-    pl.xlabel('Frequency (kHz)')
-    pl.ylabel('Power (dB)')
-    pl.show()
+
+    return [freqArray, p]
+#    pl.plot(freqArray / 1000, 10 * np.log10(p), color='k')
+#    pl.xlabel('Frequency (kHz)')
+#    pl.ylabel('Power (dB)')
+#    pl.show()
 
 
-samples = voss(44100)
-freq_resp_curve(samples)
+def pull_recording(recording, sample_rate=44100):
+    start_point = -1
+    for x in range(len(recording)):
+        if recording[x] > 1000:
+            start_point = x
+            break
+    end_point = start_point+sample_rate
+    print(str(end_point-start_point))
+
+    return np.array([recording[x] for x in range(start_point, end_point)])
 
 
-# This dosen't deal with return values... just throws them away
-Thread(target= record()).start()
-Thread(target = play_tone(samples)).start()
+def main(sample_rate=44100):
+    if __name__ == '__main__':
+        queue = Queue()
+        samples = voss(sample_rate*4)
+
+        # t = np.linspace(0, 10, 44100)
+        # samples = chirp(t, f0=12.5, f1=2.5, t1=10, method='linear')
+
+        Process(target=record, args=(queue,)).start()
+        Process(target=play_tone, args=(samples,)).start()
+        flattened = [x for sublist in queue.get() for x in sublist]
+
+        return freq_resp_curve(pull_recording(flattened))
+
+
+

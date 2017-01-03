@@ -3,10 +3,6 @@ import {Component, OnInit} from '@angular/core';
 import {BeginTestService} from "../Test/BeginTest/BeginTestService.service";
 import {ImplantSetUpPanel} from "../HardwareSetUp/ImplantSetUp/ImplantSetUpPanel";
 import {ConnectivityService} from "../Shared/ConnectivityService";
-import * as $ from "jquery";
-
-declare var navigator: any;
-declare var Connection: any;
 
 @Component({
   templateUrl: 'home-page.html',
@@ -16,6 +12,11 @@ export class HomePage implements OnInit{
 
   buttonName:String = "Next";
 
+  labelClick(label) {
+      document.querySelector('.'+label+'ToggleButton').classList.toggle('active');
+
+      document.querySelector('.'+(label === 'right' ? 'left' : 'right')+'ToggleButton').classList.remove('active');
+  }
 
   ngOnInit() {
     this.service.pageNumber = 1;
@@ -28,8 +29,7 @@ export class HomePage implements OnInit{
       buttons: ["OK"]
     });
     if(this.connectionService.isOnline()) {
-      //this.proceedToTest();
-      this.runPythonScript();
+      this.proceedToTest();
     }
     else {
       alert.present();
@@ -48,7 +48,7 @@ export class HomePage implements OnInit{
     this.navCtrl.setRoot(ImplantSetUpPanel, {}, {animate: true, direction: 'left'});
   }
 
-  runPythonScript() {
+  /*runPythonScript() {
     $.ajax({
       url: "test.py",
       cache: false,
@@ -56,5 +56,5 @@ export class HomePage implements OnInit{
         console.log(html);
       }
     });
-  }
+  }*/
 }

@@ -1,23 +1,26 @@
-<ion-content>
+<ion-content scroll="false">
   <app-header></app-header>
   <div class="container">
-    <h4 id="home-title">
-      <span class="first">Please enter your </span>
-      <span class="second">CI </span><span>number followed by your Implant label.</span>
-    </h4>
-      <div class="nhs-number-container">
-        <input id="ci-number" placeholder="eg. 943 476 5946" />
+    <h2>
+      Please enter your Cochlear Implant <span class="text-bold">number</span> and <span class="text-bold">label</span>
+    </h2>
+    <div class="input-container">
+      <div id="ci-label">
+        <label>Label</label>
+        <button ion-button class="toggleButton rightToggleButton left" (click)="labelClick('right')">R</button>
+        <button ion-button class="toggleButton leftToggleButton right" (click)="labelClick('left')">L</button>
       </div>
+    </div>
       <div class="implant-label-container">
-        <input id="implant-input" placeholder="L" />
+        <input id="implant-input" placeholder="Your number" />
       </div>
-    <button id="next-button" (click)="checkConnection()">
-      <div class="inner" center>
+  </div>
+  <button id="next-button" (click)="checkConnection()">
+    <div class="inner" center>
         <span id="next-label">{{buttonName}}
         </span>
-        <ion-icon id="arrow-icon" name="md-arrow-round-forward"></ion-icon>
-      </div>
-    </button>
-  </div>
-  <app-footer></app-footer>
+      <ion-icon id="arrow-icon" name="md-arrow-round-forward"></ion-icon>
+    </div>
+  </button>
+  <app-step-counter></app-step-counter>
 </ion-content>

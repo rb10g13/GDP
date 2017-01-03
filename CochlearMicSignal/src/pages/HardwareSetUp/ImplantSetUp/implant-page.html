@@ -1,20 +1,17 @@
 <ion-content>
   <app-header></app-header>
   <div class="implant-text-container">
-    <h3 id="title">Please ensure you have connected everything up before you proceed.</h3>
-  </div>
-  <div class="deaf-icon-container">
-    <i class="icon fa fa-deaf" aria-hidden="true"></i>
-  </div>
-  <div class="spinner-container">
-    <ion-spinner name="bubbles"></ion-spinner>
-  </div>
-  <button id="next-button" (click)="stopLoading()">
-    <div class="inner" center>
+    <div class="container">
+      <h2 id="title">Please ensure you have connected everything up before you proceed.</h2>
+      <i id="ci-icon" class="fa fa-deaf"></i>
+    </div>
+    <button id="next-button" (click)="nextPage()">
+      <div class="inner" center>
         <span id="next-label">{{buttonName}}
         </span>
-      <ion-icon id="arrow-icon" name="md-arrow-round-forward"></ion-icon>
-    </div>
-  </button>
-  <app-footer></app-footer>
+        <ion-icon id="arrow-icon" name="md-arrow-round-forward"></ion-icon>
+      </div>
+    </button>
+    <app-step-counter></app-step-counter>
+  </div>
 </ion-content>

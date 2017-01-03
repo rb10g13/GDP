@@ -1,36 +1,15 @@
-.implant-text-container {
-  text-align:center;
-  color: #feba4b;
-  font-family: Arial;
-  margin-top: 15%;
-
-    >#title {
-      display: inline-block;
-      width: 250px;
-      margin-bottom: 7%;
-    }
+#ci-icon {
+  font-size: 90px;
+  color: #949494;
+  margin-top: 40px;
+  margin-bottom: -40px;
+  width: 100%;
+  text-align: center;
 }
 
-.spinner-container {
-  text-align:center;
+.spinner {
+  margin: auto;
   display: block;
-
-  >.spinner-ios {
-    width: 28px;
-    height: 28px;
-    stroke: yellow;
-    fill: white;
-  }
-}
-
-.deaf-icon-container {
-  text-align:center;
-  display: block;
-  >.icon {
-    font-size: 100px;
-    color: #949494;
-    margin-bottom: 20%;
-  }
 }
 
 #temp-button {
@@ -50,7 +29,7 @@
     color: white;
     text-align: center;
     font-size: 15pt;
-    margin-top: 10%;
+    margin-top: 100%;
     margin-left: 25%;
     padding: 1% 1% 1% 1%;
     border: 1px solid #f0ab3d;
@@ -74,3 +53,6 @@
       padding-top: 2%;
     }
   }
+.spinner {
+  margin-top: -10px;
+}

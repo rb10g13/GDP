@@ -1,16 +1,14 @@
 <ion-content>
   <app-header></app-header>
-  <div class="success-container">
-    <h1 id="success-title">Success</h1>
-    <h3 id="success-message">Cochlear implant is in good working order</h3>
+  <div class="container">
+    <h2 id="success-title">Success</h2>
+    <h2>Your Cochlear implant is in good working order</h2>
+    <i id="check-icon" class="fa fa-check"></i>
   </div>
-  <div class="icon">
-    <ion-icon class="tick-icon" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+  <div class="button-container">
+    <button ion-button id="testFinishButton" class="primaryButton" (click)="testAgain()">
+      <span class="label">{{buttonName}}</span>
+    </button>
   </div>
-  <button id="finish-button" (click)="testAgain()">
-    <div class="label-arrow" center>
-      <span id="finish-label">{{buttonName}}</span>
-    </div>
-  </button>
-  <app-footer></app-footer>
+  <app-step-counter></app-step-counter>
 </ion-content>
