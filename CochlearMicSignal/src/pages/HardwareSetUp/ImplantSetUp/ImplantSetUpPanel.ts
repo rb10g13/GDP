@@ -9,7 +9,7 @@ import {BeginTestService} from "../../Test/BeginTest/BeginTestService.service";
 
 export class ImplantSetUpPanel implements OnInit{
 
-  buttonName:String = "stop loading";
+  buttonName:String = "Next";
 
   ngOnInit() {
     this.service.pageNumber = 2;
