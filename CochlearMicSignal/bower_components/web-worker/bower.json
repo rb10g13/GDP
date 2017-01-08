@@ -1,0 +1,32 @@
+{
+  "name": "web-worker",
+  "version": "0.0.6",
+  "main": "dist/web-worker.min.js",
+  "description": "An angular.js module utilizing web workers to execute code asynchronously in a seperate thread",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esphen/web-worker.git"
+  },
+  "dependencies": {
+    "angular": "*"
+  },
+  "main":[
+    "./dist/web-worker.min.js"
+  ],
+  "devDependencies": {
+    "angular-mocks": "*"
+  },
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "package.json",
+    "lib",
+    "test",
+    "src",
+    "Gruntfile.js",
+    ".gitignore",
+    "README.md",
+    "travis.yml",
+    ".bowercc"
+  ]
+}

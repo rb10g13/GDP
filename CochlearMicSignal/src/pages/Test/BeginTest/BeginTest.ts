@@ -22,24 +22,60 @@ export class BeginTest implements OnInit {
 
   beginTest() {
     var generatePinkNoise = require('openmusic-pink-noise');
-
     var samples:number[] = generatePinkNoise(44100);
-    console.log(samples);
+    var finished: boolean = false;
 
-    //var Worker = require('webworker-threads').Worker;
+   /* const spawn = require('threads').spawn;
 
+    const thread = spawn(function(input, done) {
+      //console.log('something');
+      //output = this.recordAudio();
+      //console.log("-------->" + output);
+      // Everything we do here will be run in parallel in another execution context.
+      // Remember that this function will be executed in the thread's context,
+      // so you cannot reference any value of the surrounding code.
+      done({ function : input });
+
+    });
+
+     thread.send({ function : this.recordAudio })
+     // The handlers come here: (none of them is mandatory)
+     .on('message', function(response) {
+       console.log("-------->" + response;
+     thread.kill();
+     })
+     .on('error', function(error) {
+     console.error('Worker errored:', error);
+     })
+     .on('exit', function() {
+     console.log('Worker has been terminated.');
+     });
+*/
+
+
+    /*var Worker = require('webworker-threads/src/worker.js');
+
+     // You may also pass in a function:
+     var worker = new Worker(function () {
+     console.log("I'm working before postMessage('ali').");
+     /!*this.onmessage = function (event) {
+     console.log('Hi ' + event.data);
+     output = this.recordAudio();
+     self.close();
+     };*!/
+     });*/
+
+
+    /*while(finished == false) {
+     if(output.length != 0) {
+     finished = true;
+
+     }
+     }*/
     this.playAudio(samples);
-    // You may also pass in a function:
-    /*var worker = new Worker(function () {
-      console.log("I'm working before postMessage('ali').");
-      this.onmessage = function (event) {
-        console.log('Hi ' + event.data);
-        self.close();
-      };
-    });*/
-    //this.navCtrl.setRoot(ProgressPanel, {}, {animate: true, direction: 'left'});
-
     this.recordAudio();
+    //set root and send the output array to the server
+    //this.navCtrl.setRoot(ProgressPanel, {}, {animate: true, direction: 'left'});
   }
 
 
@@ -61,32 +97,30 @@ export class BeginTest implements OnInit {
     var getUserMedia = require('getusermedia');
     var MicrophoneStream = require('microphone-stream');
     var output: number[] = [];
+    var count = 0;
 
     getUserMedia({video: false, audio: true}, function (err, stream) {
       var micStream = new MicrophoneStream(stream);
-
+      console.log('stream ' + stream);
+      var sample_rate = 44100;
+      var chunkSize = 4096;
+      var duration = 3;
       // get Buffers (Essentially a Uint8Array DataView of the same Float32 values)
       micStream.on('data', function (chunk) {
         // Optionally convert the Buffer back into a Float32Array
         // (This actually just creates a new DataView - the underlying audio data is not copied or modified.)
-        var raw = MicrophoneStream.toRaw(chunk)
-        //...
-        output.push(raw);
-        // note: if you set options.objectMode=true, the `data` event will output AudioBuffers instead of Buffers
+        if(count >= sample_rate / chunkSize * duration) {
+          micStream.stop();
+          return output;
+        } else {
+          count++;
+          var raw = MicrophoneStream.toRaw(chunk);
+          console.log(raw);
+          output.push(raw);
+        }
       });
-
-      // or pipe it to another stream
-      console.log(output);
-      
-      // It also emits a format event with various details (frequency, channels, etc)
-      micStream.on('format', function (format) {
-        console.log(format);
-      });
-
-      // Stop when ready
-      document.getElementById('my-stop-button').onclick = function () {
-        micStream.stop();
-      };
     });
+
+    console.log("bla")
   }
 }
