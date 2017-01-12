@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 var bodyParser = require('body-parser');
+var PythonShell = require('python-shell');
 
 module.exports = function(app) {
 
@@ -16,26 +17,64 @@ module.exports = function(app) {
     return res.sendStatus(400); // Bad Request
   };
 
+  var produceFRC = function() {
+    PythonShell.run('../../../CI_Tests/FRC.py', function(err) {
+      if (err) throw err;
+      console.log('finished');
+    });
+  };
+  produceFRC();
 
-  // ** API Routes **
-  var baseRoute = '/reading';
 
-  // Register new article
-  app.post('reading/first', bodyParser.json(), function(req, res) {
-    var reading = req.body;
+  // Post control (initial) reading
+  app.get('/reading/exists/:number/:ear', function(req, res) {
+    var number = req.params.number;
+    var ear = req.params.ear;
 
-    Reading.create(reading, function() {
+    var implant_id = {
+      number: number,
+      ear: ear
+    };
+
+    Reading.count({ impland_id: implant_id }, function(err, count) {
+      if (err) handleError(err);
+      console.log(count);
+      res.json({ count: count }).status(200);
+    });
+  });
+
+  // Post control (initial) reading
+  app.post('/reading/control', bodyParser.json(), function(req, res) {
+    var recording = req.body.recording;
+    var implant_id = req.body.implant_id;
+
+    var reading = {
+      control: true,
+      implant_id: implant_id,
+      frc: FRC,
+      date: new Date(),
+    };
+
+    Reading.create(reading, function(err) {
       if (err) handleError(err);
 
       res.sendStatus(200);
     });
   });
 
-  //Get article by _id
-  app.post('reading/new', bodyParser.json(), function(req, res) {
-    var reading = req.body;
+  // Register new reading in database and send result back
+  app.post('/reading/new', bodyParser.json(), function(req, res) {
+    var recording = req.body.recording;
+    var implant_id = req.body.implant_id;
 
-    Reading.create(reading, function() {
+    var reading = {
+      control: false,
+      implant_id: implant_id,
+      frc: FRC,
+      date: new Date(),
+    };
+
+    Reading.create(reading, function(err) {
       if (err) handleError(err);
 
       res.send({}).status(200);

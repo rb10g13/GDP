@@ -1,16 +1,15 @@
 var mongoose = require('mongoose');
 
-console.log('Here');
-
 var ReadingSchema = new mongoose.Schema({
   // Core content data
+  control: Boolean,
   implant_id: {
     number: Number,
     ear: String
   },
-  readings: [
-    [Number][Number]
-  ]
+  frc: [Number],
+  date: Date,
+  faulty: Boolean
 });
 
 mongoose.model('Reading', ReadingSchema);

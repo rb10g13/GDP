@@ -11,7 +11,8 @@ import { SuccessPanel } from "../pages/Test/Results/Success/SuccessPanel"
 import { ErrorPanel } from "../pages/Test/Results/Failure/ErrorPanel";
 import { ImplantSetUpPanel } from "../pages/HardwareSetUp/ImplantSetUp/ImplantSetUpPanel";
 import { MobileSetUpPanel } from "../pages/HardwareSetUp/MobileSetUp/MobileSetUpPanel";
-import {ConnectivityService} from "../pages/Shared/ConnectivityService";
+import { ConnectivityService } from "../pages/Shared/ConnectivityService";
+import { NetworkService } from "../pages/Shared/NetworkService";
 
 
 @NgModule({
@@ -43,6 +44,6 @@ import {ConnectivityService} from "../pages/Shared/ConnectivityService";
     ImplantSetUpPanel,
     MobileSetUpPanel
   ],
-  providers: [BeginTestService, ConnectivityService]
+  providers: [BeginTestService, ConnectivityService, NetworkService]
 })
 export class AppModule {}

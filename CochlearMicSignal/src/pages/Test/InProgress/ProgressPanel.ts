@@ -3,6 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {SuccessPanel} from "../Results/Success/SuccessPanel";
 import {ErrorPanel} from "../Results/Failure/ErrorPanel";
 import {BeginTestService} from "../BeginTest/BeginTestService.service";
+import {NetworkService} from "../../Shared/NetworkService";
 
 @Component({
   templateUrl: 'progress-page.html'
@@ -15,7 +16,7 @@ export class ProgressPanel implements OnInit{
   }
 
 
-  constructor(public navCtrl: NavController, public service: BeginTestService) {
+  constructor(public navCtrl: NavController, public service: BeginTestService, public networkService: NetworkService) {
 
   }
 
