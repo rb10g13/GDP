@@ -1,7 +1,9 @@
-import {NavController} from 'ionic-angular';
+import {NavController, AlertController} from 'ionic-angular';
 import {Component, OnInit} from '@angular/core';
 import {BeginTestService} from "./BeginTestService.service";
 import {ProgressPanel} from "../InProgress/ProgressPanel";
+import {MediaPlugin, CaptureAudioOptions} from "ionic-native/dist/es5/index";
+import { MediaCapture, MediaFile, CaptureError, CaptureImageOptions, File, FileSystem } from 'ionic-native';
 
 @Component({
   templateUrl: 'begin-page.html'
@@ -16,7 +18,7 @@ export class BeginTest implements OnInit {
     this.service.pageNumber = 3;
   }
 
-  constructor(public navCtrl:NavController, private service:BeginTestService) {
+  constructor(public navCtrl:NavController, private service:BeginTestService, private alertCtrl: AlertController) {
 
   }
 
@@ -93,34 +95,32 @@ export class BeginTest implements OnInit {
     bufferSource.start();
   }
 
+  myFunction() {
+    setTimeout(null, 3000);
+  }
+
   recordAudio() {
-    var getUserMedia = require('getusermedia');
-    var MicrophoneStream = require('microphone-stream');
-    var output: number[] = [];
-    var count = 0;
+// Recording to a file
+    let arr: number[] = [];
+    let mediaFiles: MediaFile[][] = [];
+    let options: CaptureAudioOptions = { limit: 1, duration: 3};
+    MediaCapture.captureAudio(options).then(
+      (data: MediaFile[]) => mediaFiles.push(data),
+      (err: CaptureError) => console.error(err));
+    console.log('-> '+mediaFiles);
+    /*  var newFile = new MediaPlugin('Media.txt');
+      newFile.startRecord();
+      newFile.stopRecord();
+      this.playAlert('tesrt');*/
+  }
 
-    getUserMedia({video: false, audio: true}, function (err, stream) {
-      var micStream = new MicrophoneStream(stream);
-      console.log('stream ' + stream);
-      var sample_rate = 44100;
-      var chunkSize = 4096;
-      var duration = 3;
-      // get Buffers (Essentially a Uint8Array DataView of the same Float32 values)
-      micStream.on('data', function (chunk) {
-        // Optionally convert the Buffer back into a Float32Array
-        // (This actually just creates a new DataView - the underlying audio data is not copied or modified.)
-        if(count >= sample_rate / chunkSize * duration) {
-          micStream.stop();
-          return output;
-        } else {
-          count++;
-          var raw = MicrophoneStream.toRaw(chunk);
-          console.log(raw);
-          output.push(raw);
-        }
-      });
+  playAlert(raw) {
+    var message = raw.toString();
+    let alert2 = this.alertCtrl.create({
+      title: "Message",
+      message: message,
+      buttons: ["OK"]
     });
-
-    console.log("bla")
+    alert2.present();
   }
 }
