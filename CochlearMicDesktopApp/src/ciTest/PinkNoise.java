@@ -2,7 +2,7 @@ package ciTest;
 
 import java.util.Random;
 
-// I stole this code from http://sampo.kapsi.fi/PinkNoise/PinkNoise.java
+/*** I stole this code from http://sampo.kapsi.fi/PinkNoise/PinkNoise.java ***/
 
 public class PinkNoise {
     private final int poles;

@@ -1,5 +1,9 @@
 package ciTest;
 
+import java.util.concurrent.ExecutionException;
+
+import javax.sound.sampled.LineUnavailableException;
+
 import db.DatabaseController;
 
 public class CITest {
@@ -8,9 +12,16 @@ public class CITest {
 	 * 1 - test passed
 	 * 0 - test failed
 	 * -1 - initial test
+	 * -2 - Error
 	 */
 	public static int performTest(int ciNumber){
-		double[] frcData = FRC.generateFRC();
+		double[] frcData;
+		try {
+			frcData = FRC.generateFRC();
+		} catch (LineUnavailableException | InterruptedException | ExecutionException e) {
+			// If there is any error within the process, return the error identifier
+			return -2;
+		}
 		
 		DatabaseController dbc = new DatabaseController();
 		double[] initialTest = dbc.getInitialTestData(ciNumber);
@@ -29,7 +40,10 @@ public class CITest {
 
 	}
 	
-	
+	/*Takes the initial test data and the new test data:
+	*	Calculates the difference between them
+	*	Checks that the difference is within the given guidelines
+	*/
 	private static boolean compare(double[] initialData, double[] newData){
 		double[] difference = new double[initialData.length];
 		

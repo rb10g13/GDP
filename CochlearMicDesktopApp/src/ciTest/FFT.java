@@ -1,5 +1,7 @@
 package ciTest;
 
+/*** I stole this code from https://www.nayuki.io/res/free-small-fft-in-multiple-languages/Fft.java ***/
+
 public class FFT {
 	/* 
 	 * Computes the discrete Fourier transform (DFT) of the given complex vector, storing the result back into the vector.

@@ -14,7 +14,7 @@ import javax.sound.sampled.LineUnavailableException;
 public class Tone {
 	
 	//Generates a sound given a byte array of sound data
-	public static void playTone(double[] samples){
+	public static void playTone(double[] samples) throws LineUnavailableException, InterruptedException{
 		
 		/*Can't play more than 16bit precision in java,
 		 * thus scale double values within the range of short
@@ -22,20 +22,14 @@ public class Tone {
 		 */
 		byte[] byteSamples = convertToByte(convertToShort(samples));
 		AudioFormat  af = new AudioFormat(Recorder.sampleRate, Recorder.bitsPerSample, Recorder.channels, true, true);
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(af, byteSamples, 0, byteSamples.length);
-			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			gainControl.setValue(-50.0f);
-			clip.start();
-			clip.drain();
-			
-			Thread.sleep(1000); // Fixes bug with clip.drain()
-			clip.close();
-		} catch (LineUnavailableException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Clip clip = AudioSystem.getClip();
+		clip.open(af, byteSamples, 0, byteSamples.length);
+		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		gainControl.setValue(-50.0f);
+		clip.start();
+		clip.drain();
+		Thread.sleep(1000); // Fixes bug with clip.drain()
+		clip.close();
 		
 
 	}

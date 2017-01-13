@@ -6,6 +6,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import javax.sound.sampled.LineUnavailableException;
+
 import flanagan.analysis.CurveSmooth;
 
 public class FRC {
@@ -16,7 +18,7 @@ public class FRC {
 	 * Cuts it to just the frequencies we require
 	 *Returns a float array corresponding to the dB values 
 	 */
-	public static double[] generateFRC(){
+	public static double[] generateFRC() throws LineUnavailableException, InterruptedException, ExecutionException{
 		//Get the recording
 		double[] recordData = recordTone();
 		//Get the FFT of the recording
@@ -56,7 +58,7 @@ public class FRC {
 	 * Trimming the recording to just give data we need
 	 *Returns float of sound data
 	 */
-	private static double[] recordTone(){
+	private static double[] recordTone() throws LineUnavailableException, InterruptedException, ExecutionException{
 		//Get pink noise samples
 		PinkNoise pn = new PinkNoise();
 		double[] pinkNoiseSamples = new double[Recorder.sampleRate];
@@ -76,18 +78,10 @@ public class FRC {
 		Tone.playTone(pinkNoiseSamples);
 		while(!recordData.isDone()){}
 		pool.shutdown();
-		try {
-			return grabTone(recordData.get());
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return grabTone(recordData.get());
+
 		
-		//Will never get here
-		return null;
+
 	}
 	
 	
