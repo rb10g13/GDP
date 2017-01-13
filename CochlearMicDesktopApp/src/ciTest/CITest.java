@@ -16,10 +16,12 @@ public class CITest {
 		double[] initialTest = dbc.getInitialTestData(ciNumber);
 		if(initialTest == null){
 			//If there was no previous test, return
+			dbc.shutdown();
 			return -1;
 		}else{
 			//Store the new test data
 			dbc.pushTestResult(ciNumber, frcData);
+			dbc.shutdown();
 			boolean testOutcome = compare(initialTest, frcData);
 			if(testOutcome) return 1;
 			else return 0;
