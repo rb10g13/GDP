@@ -46,6 +46,7 @@ public class Main extends Application {
     public void beginTest() throws Exception{
         progressPage();
         outcome = CITest.performTest(ciNumber);
+        System.out.println("outcome of test: "+outcome);
     }
 
     public static void main(String[] args) {

@@ -18,6 +18,7 @@ public class CITest {
 		double[] frcData;
 		try {
 			frcData = FRC.generateFRC();
+			//for(double d : frcData) System.out.println(d);
 		} catch (LineUnavailableException | InterruptedException | ExecutionException e) {
 			// If there is any error within the process, return the error identifier
 			return -2;
@@ -27,15 +28,20 @@ public class CITest {
 		double[] initialTest = dbc.getInitialTestData(ciNumber);
 		if(initialTest == null){
 			//If there was no previous test, return
+			dbc.pushTestResult(ciNumber, frcData, -1);
 			dbc.shutdown();
 			return -1;
 		}else{
 			//Store the new test data
-			dbc.pushTestResult(ciNumber, frcData);
 			dbc.shutdown();
 			boolean testOutcome = compare(initialTest, frcData);
-			if(testOutcome) return 1;
-			else return 0;
+			if(testOutcome){
+				dbc.pushTestResult(ciNumber, frcData, 1);
+				return 1;
+			}else{
+				dbc.pushTestResult(ciNumber, frcData, 0);
+				return 0;
+			}
 		}
 
 	}

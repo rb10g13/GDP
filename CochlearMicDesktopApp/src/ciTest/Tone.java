@@ -25,7 +25,7 @@ public class Tone {
 		Clip clip = AudioSystem.getClip();
 		clip.open(af, byteSamples, 0, byteSamples.length);
 		FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-		gainControl.setValue(-50.0f);
+		//gainControl.setValue(-50.0f);
 		clip.start();
 		clip.drain();
 		Thread.sleep(1000); // Fixes bug with clip.drain()

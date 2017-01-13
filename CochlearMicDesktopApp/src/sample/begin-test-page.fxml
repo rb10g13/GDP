@@ -16,7 +16,7 @@
    <children>
       <Pane prefHeight="397.0" prefWidth="392.0">
          <children>
-            <Button layoutX="143.0" layoutY="288.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="107.0" text="BeginTest" onAction="#progressPage"/>
+            <Button layoutX="143.0" layoutY="288.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="107.0" text="BeginTest" onAction="#beginTest"/>
          </children>
       </Pane>
    </children>

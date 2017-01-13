@@ -22,14 +22,14 @@ public class DatabaseController {
 	//Initialise connection to database
 	public DatabaseController(){
 		connectionString = new MongoClientURI("mongodb://se6g13:gdp18@ds163758.mlab.com:63758/gdp");
-		MongoClient mongoClient = new MongoClient(connectionString);
+		mongoClient = new MongoClient(connectionString);
 		database = mongoClient.getDatabase("gdp");
 		collection = database.getCollection("CITests");
 	}
 	
 	
 	//NEVER RUN THIS BEFORE GETTING THE INITIAL TEST DATA
-	public void pushTestResult(int ciNumber, double[] testData){
+	public void pushTestResult(int ciNumber, double[] testData, int outcome){
 
 		
 		if(collection.find(eq("_id", ciNumber)).first() == null){
@@ -43,6 +43,7 @@ public class DatabaseController {
 			Document testInfoDocument = new Document();
 			testInfoDocument.append("date", Calendar.getInstance().getTime());
 			testInfoDocument.append("frc", convertArrayToList(testData));
+			testInfoDocument.append("outcome", outcome);
 			testInfo.add(testInfoDocument);
 			
 			newDoc.append("tests", testInfo);
@@ -52,7 +53,8 @@ public class DatabaseController {
 			collection.updateOne(new Document("_id", ciNumber), 
 					new Document("$push", 
 							new Document("tests", new Document("date", Calendar.getInstance().getTime())
-									.append("frc", convertArrayToList(testData)))));
+									.append("frc", convertArrayToList(testData))
+									.append("outcome", outcome))));
        }
 	}
 	

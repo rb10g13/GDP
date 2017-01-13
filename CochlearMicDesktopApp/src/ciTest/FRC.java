@@ -35,10 +35,10 @@ public class FRC {
 		 * -Take the log
 		 */
 		for(int i=0; i<fftData.length; i++){
-			fftData[i] = Math.abs(fftData[i]);
 			fftData[i] = fftData[i]/fftData.length;
 			fftData[i] = Math.pow(fftData[i], 2);
 			fftData[i] = Math.log10(fftData[i]);
+			fftData[i] = fftData[i]*10;
 		}
 		
 		//Trim to be between the frequency range of the device (200-8k)
@@ -69,15 +69,12 @@ public class FRC {
 		
 		ExecutorService pool = Executors.newFixedThreadPool(1);
 		Future<float[]> recordData = pool.submit(new Recorder());
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		Thread.sleep(1000);
 		Tone.playTone(pinkNoiseSamples);
 		while(!recordData.isDone()){}
 		pool.shutdown();
+
+
 		return grabTone(recordData.get());
 
 		
@@ -90,25 +87,39 @@ public class FRC {
 	 *Returns this as a float array of sound data 
 	 */
 	private static double[] grabTone(float[] recording){
-		int startPoint = -1;
-		for(int i = 0; i < recording.length; i++){
-			if(recording[i] > 30000){
-				startPoint = i;	
-				break;
+		int windowSize = Recorder.sampleRate;
+
+		int maxWindowIndex = -1;
+		float maxWindowAverage = 0;
+		for(int i = 0; i < 2*windowSize; i++){
+
+			float thisWindow = average(Arrays.copyOfRange(recording, i, i+44100));
+			if(thisWindow > maxWindowAverage){
+				maxWindowIndex = i;
+				maxWindowAverage = thisWindow;
 			}
 		}
 		
 		//Get the portion of the array required and convert to double
 		double[] newData = new double[44100];
 		int count = 0;
-		for(int i = startPoint; i < startPoint+44100; i++){
+		for(int i = maxWindowIndex; i < maxWindowIndex+44100; i++){
 			newData[count] = (double) recording[i];
+			//System.out.println(newData[count]);
 			count++;
 		}
 		
 		return newData;
 	}
-	
+
+
+	private static float average(float[] data){
+		float total = 0;
+		for(float f : data){
+			total+=Math.abs(f);
+		}
+		return total/data.length;
+	}
 	
 
 	
