@@ -1,0 +1,75 @@
+package ciTest;
+
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineUnavailableException;
+
+
+public class Tone {
+	
+	//Generates a sound given a byte array of sound data
+	public static boolean playTone(double[] samples){
+		
+		/*Can't play more than 16bit precision in java,
+		 * thus scale double values within the range of short
+		 * then convert to bytes
+		 */
+		byte[] byteSamples = convertToByte(convertToShort(samples));
+		AudioFormat  af = new AudioFormat(Recorder.sampleRate, Recorder.bitsPerSample, Recorder.channels, true, true);
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(af, byteSamples, 0, byteSamples.length);
+			FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			gainControl.setValue(-50.0f);
+			clip.start();
+			clip.drain();
+			
+			Thread.sleep(1000); // Fixes bug with clip.drain()
+			clip.close();
+			return true;
+		} catch (LineUnavailableException | InterruptedException e) {
+			return false;
+		}
+		
+
+	}
+	
+	private static short[] convertToShort(double[] samples){
+		short[] shortSamples = new short[samples.length];
+		for(int i = 0; i < shortSamples.length; i++){
+			int converted = (int) (samples[i]*10000);
+			if(converted > Short.MAX_VALUE){
+				converted = Short.MAX_VALUE;
+			}else if(converted < Short.MIN_VALUE){
+				converted = Short.MIN_VALUE;
+			}
+			shortSamples[i] = (short) converted;
+		}
+		
+		return shortSamples;
+	}
+	
+	//Generates a byte array of pink noise
+	private static byte[] convertToByte(short[] samples){
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		DataOutputStream dos = new DataOutputStream(baos);
+		
+		for(short s : samples){
+			try {
+				dos.writeShort(s);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return baos.toByteArray();
+	}
+
+}
