@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="310.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Main">
+   <children>
+      <AnchorPane prefHeight="329.0" prefWidth="392.0">
+         <children>
+            <Button layoutX="143.0" layoutY="241.0" mnemonicParsing="false" onAction="#beginTest" prefHeight="27.0" prefWidth="107.0" text="Begin Test" />
+            <Label alignment="CENTER" layoutX="94.0" layoutY="111.0" prefHeight="52.0" prefWidth="205.0" text="Please ensure your device is " textAlignment="CENTER" textOverrun="CLIP" />
+            <Label alignment="CENTER" prefHeight="72.0" prefWidth="392.0" text="Cochlear Implant Test">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="94.0" layoutY="125.0" prefHeight="52.0" prefWidth="205.0" text="connected to the testing box" textAlignment="CENTER" textOverrun="CLIP" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
