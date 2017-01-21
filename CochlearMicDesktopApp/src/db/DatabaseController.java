@@ -29,6 +29,7 @@ public class DatabaseController {
 	
 	
 	//NEVER RUN THIS BEFORE GETTING THE INITIAL TEST DATA
+	// ^- I can't remember why... on reflection I don't see a problem doing this but just incase don't.
 	public void pushTestResult(int ciNumber, double[] testData, int outcome){
 
 		
@@ -38,7 +39,7 @@ public class DatabaseController {
 			//This makes sense to me. Good luck anyone else.
 			Document newDoc = new Document();
 			newDoc.append("_id", ciNumber);
-			
+			newDoc.append("working",outcome);
 			List<Document> testInfo = new ArrayList<Document>();
 			Document testInfoDocument = new Document();
 			testInfoDocument.append("date", Calendar.getInstance().getTime());
@@ -54,8 +55,9 @@ public class DatabaseController {
 			collection.updateOne(new Document("_id", ciNumber), 
 					new Document("$push", 
 							new Document("tests", new Document("date", Calendar.getInstance().getTime())
-									.append("frc", convertArrayToList(testData))
-									.append("outcome", outcome))));
+									.append("frc", convertArrayToList(testData)))));
+			
+			collection.updateOne(new Document("_id", ciNumber), new Document("working", outcome));
        }
 	}
 	
@@ -69,6 +71,29 @@ public class DatabaseController {
 			return convertListToArray((List<Double>) dataList.get(0).get("frc"));
 		}
 	}
+	
+	
+	public double[] getLastTest(int ciNumber){
+		Document ciEntry = collection.find(eq("_id", ciNumber)).first();
+		if(ciEntry == null){
+			return null;
+		}else{
+			//Theres so much that could go wrong here too...
+			List<Document> dataList = (List<Document>) ciEntry.get("tests");
+			return convertListToArray((List<Double>) dataList.get(dataList.size()-1).get("frc"));
+		}
+	}
+	
+	
+	//Gets all CI numbers of non working mics
+	public ArrayList<Integer> getFaulty(){
+		ArrayList<Integer> faulty = new ArrayList<Integer>();
+		for(Document entry : collection.find(eq("working", 0))){
+			faulty.add((Integer) entry.get("_id"));
+		}
+		return faulty;
+	}
+
 	
 	
 	public void shutdown(){
