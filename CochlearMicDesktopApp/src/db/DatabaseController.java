@@ -43,7 +43,8 @@ public class DatabaseController {
 			Document testInfoDocument = new Document();
 			testInfoDocument.append("date", Calendar.getInstance().getTime());
 			testInfoDocument.append("frc", convertArrayToList(testData));
-			testInfoDocument.append("outcome", outcome);
+			testInfoDocument.append("out" +
+					"come", outcome);
 			testInfo.add(testInfoDocument);
 			
 			newDoc.append("tests", testInfo);

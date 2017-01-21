@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="982.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Main">
+   <children>
+      <ScrollPane layoutX="7.0" layoutY="45.0" prefHeight="584.0" prefWidth="199.0" style="-fx-border-color: black;">
+         <content>
+            <VBox fx:id="content" prefHeight="564.0" prefWidth="196.0" />
+         </content></ScrollPane>
+      <Button id="generate" layoutX="7.0" layoutY="14.0" mnemonicParsing="false" onAction="#generateRecordings" prefHeight="27.0" prefWidth="199.0" text="Generate Faulty Implants" />
+      <Button layoutX="519.0" layoutY="646.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="165.0" text="Mark as reviewed" />
+      <Pane layoutX="225.0" layoutY="46.0" prefHeight="584.0" prefWidth="737.0" style="-fx-border-color: black;">
+         <children>
+            <Pane fx:id="initialRecording" layoutX="40.0" layoutY="30.0" prefHeight="493.0" prefWidth="670.0" stylesheets="@Style.css" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

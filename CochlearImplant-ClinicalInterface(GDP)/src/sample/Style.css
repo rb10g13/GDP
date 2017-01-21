@@ -1,0 +1,27 @@
+.chart {
+
+}
+.chart-content {
+}
+
+.chart-title {
+  -fx-padding: 0px 0px 0px 20px;
+  -fx-font-size: 1.6em;
+}
+
+.axis-label {
+  -fx-text-fill: #4682b4;
+}
+
+.chart-legend {
+   -fx-background-color:  transparent;
+   -fx-padding: 5px;
+}
+
+.chart-legend-item-symbol{
+   -fx-background-radius: 0;
+}
+
+.chart-legend-item{
+    -fx-text-fill: #191970;
+}
