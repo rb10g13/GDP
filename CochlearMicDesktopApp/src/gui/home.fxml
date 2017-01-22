@@ -14,7 +14,7 @@
    <children>
       <AnchorPane fx:id="aPane" prefHeight="458.0" prefWidth="511.0">
          <children>
-            <TextField layoutX="122.0" layoutY="123.0" />
+            <TextField fx:id="ciField" layoutX="122.0" layoutY="123.0" />
             <ToggleButton fx:id="left" layoutX="160.0" layoutY="171.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="L">
                <toggleGroup>
                   <ToggleGroup fx:id="tg1" />

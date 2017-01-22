@@ -50,12 +50,14 @@ public class Main extends Application {
     }
 
     public void beginTest() {
-    	/*TODO - VALIDATION FOR CI INPUT
-    	*	-No String
-    	*	-Not empty
-    	*	-Just numbers
-    	*/
-    	int ciNumber = Integer.parseInt(ciField.getText());
+
+        int ciNumber;
+    	try {
+    	    ciNumber = Integer.parseInt(ciField.getText());
+        } catch(NumberFormatException e) {
+            this.setOutcomeText("Your CI number is of incorrect format. Hint(0-9) is allowed only.");
+            return;
+        }
 
     	String ear = "";
     	if(right.isSelected()){

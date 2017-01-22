@@ -4,24 +4,40 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="310.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Main">
+<VBox prefHeight="358.0" prefWidth="392.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Main">
    <children>
-      <AnchorPane prefHeight="329.0" prefWidth="392.0">
+      <AnchorPane fx:id="aPane" prefHeight="458.0" prefWidth="511.0">
          <children>
-            <TextField layoutX="122.0" layoutY="127.0" />
-            <ToggleButton layoutX="178.0" layoutY="169.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="L" />
-            <ToggleButton layoutX="227.0" layoutY="169.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="R" />
-            <Label alignment="CENTER" layoutX="122.0" layoutY="168.0" prefHeight="27.0" prefWidth="36.0" text="Ear" />
-            <Button layoutX="143.0" layoutY="241.0" mnemonicParsing="false" onAction="#setUpPage" prefHeight="27.0" prefWidth="107.0" text="Next" />
-            <Label alignment="CENTER" layoutX="94.0" layoutY="87.0" prefHeight="52.0" prefWidth="205.0" text="Please insert your CI number" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
-            <Label alignment="CENTER" prefHeight="72.0" prefWidth="392.0" text="Cochlear Implant Test">
+            <TextField fx:id="ciField" layoutX="122.0" layoutY="123.0" />
+            <ToggleButton fx:id="left" layoutX="160.0" layoutY="171.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="L">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tg1" />
+               </toggleGroup>
+            </ToggleButton>
+            <ToggleButton fx:id="right" layoutX="197.0" layoutY="171.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="36.0" text="R" toggleGroup="$tg1" />
+            <Label alignment="CENTER" layoutX="138.0" layoutY="150.0" prefHeight="27.0" prefWidth="36.0" text="Ear" />
+            <Button layoutX="143.0" layoutY="248.0" mnemonicParsing="false" onAction="#beginTest" prefHeight="27.0" prefWidth="107.0" text="Begin" />
+            <Label alignment="CENTER" layoutX="94.0" layoutY="83.0" prefHeight="52.0" prefWidth="205.0" text="Please insert your CI number" textAlignment="CENTER" textOverrun="CENTER_ELLIPSIS" />
+            <Label alignment="CENTER" layoutY="57.0" prefHeight="52.0" prefWidth="392.0" text="Ensure that your device is connected to the testing box" />
+            <Line endX="20.0" layoutX="219.0" layoutY="165.0" startX="-50.0" />
+            <Line endY="6.0" layoutX="154.0" layoutY="195.0" startY="-22.0" />
+            <Line endY="10.0" layoutX="239.0" layoutY="191.0" startY="-25.0" />
+            <Line endX="35.0" layoutX="204.0" layoutY="202.0" startX="-50.0" />
+            <Label alignment="CENTER" layoutY="203.0" prefHeight="52.0" prefWidth="392.0" text="The test may take several minutes. Please be patient!" />
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="392.0" text="Cochlear Implant Test">
                <font>
                   <Font size="21.0" />
+               </font>
+            </Label>
+            <Label fx:id="outcomeLabel" alignment="CENTER" layoutX="1.0" layoutY="298.0" prefHeight="60.0" prefWidth="392.0" textAlignment="CENTER">
+               <font>
+                  <Font size="15.0" />
                </font>
             </Label>
          </children>
