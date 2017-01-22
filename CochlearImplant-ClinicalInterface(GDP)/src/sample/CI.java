@@ -1,25 +1,36 @@
 package sample;
 
-import javafx.beans.property.SimpleStringProperty;
-
 public class CI {
 
-    public SimpleStringProperty ci;
-    public SimpleStringProperty right;
-
-    public CI(String ci, String right) {
-        this.ci = new SimpleStringProperty(ci);
-        this.right = new SimpleStringProperty(right);
+	private int ciNumber;
+	private String ear;
+	private double[] initialTest;
+	private double[] finalTest;
+	
+    public CI(int ciNumber, String ear, double[] initialTest, double[] finalTest) {
+        this.ciNumber = ciNumber;
+        this.ear = ear;
+        this.initialTest = initialTest;
+        this.finalTest = finalTest;
     }
 
 
     //represents the CI Number
-    public String getLeft() {
-        return this.ci.get();
+    public int getCINumber() {
+        return ciNumber;
     }
 
     //represents the Faulty implant
-    public String getRight() {
-        return this.right.get();
+    public String getEar() {
+        return this.ear;
     }
+    
+    public double[] getInitial(){
+    	return this.intialTest;
+    }
+    
+    public double[] getFinal(){
+    	return this.finalTest;
+    }
+    
 }
