@@ -45,17 +45,17 @@ public class Main extends Application {
 			System.out.println("OH MY GOD SOMETHING TERRIBLE HAS HAPPENED");
 			e.printStackTrace();
 		}
-        
+
 
     }
 
     public void beginTest() {
-
         int ciNumber;
+
     	try {
     	    ciNumber = Integer.parseInt(ciField.getText());
         } catch(NumberFormatException e) {
-            this.setOutcomeText("Your CI number is of incorrect format. Hint(0-9) is allowed only.");
+            this.setOutcomeText("Your CI number is of incorrect format. Please try again (Numbers(0-9) can be used only).");
             return;
         }
 
@@ -67,7 +67,7 @@ public class Main extends Application {
     	}
 
     	if(ear.length() == 0){
-    		this.setOutcomeText("Please select which implant you are testing (left/ right)");
+    		this.setOutcomeText("Please select the implant you are testing (left/right)");
     	}else{
 
     		double[] frcData = CITest.performTest();
@@ -77,17 +77,17 @@ public class Main extends Application {
     		if(initialTest == null) {
     			dbc.pushTestResult(ciNumber, frcData, -1, ear);
     			dbc.shutdown();
-    			setOutcomeText("Intial test saved");
+    			setOutcomeText("Initial test saved. You can now close this window. Thank you!");
     		} else {
     			boolean testOutcome = CITest.compare(initialTest, frcData);
     			if(testOutcome) {
     				dbc.pushTestResult(ciNumber, frcData, 1, ear);
     				dbc.shutdown();
-    				setOutcomeText("Test passed");
+    				setOutcomeText("Test passed. You can now close this window. Thank you!");
     			} else {
     				dbc.pushTestResult(ciNumber, frcData, 0, ear);
     				dbc.shutdown();
-    				setOutcomeText("Test failed, please try again");
+    				setOutcomeText("Test failed. Your Clinic will contact you shortly. You can now close this window. Thank you!");
     			}
     		}
     	}
