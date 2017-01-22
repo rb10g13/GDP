@@ -52,14 +52,11 @@ public class Main extends Application {
 
     public void createChart() throws Exception{
 
-        final NumberAxis xAxis = new NumberAxis();
+        final NumberAxis xAxis = new NumberAxis("Some Data annotation", 200, 8000, 10.5);
+        xAxis.setTickLabelRotation(90d);
+        xAxis.setAnimated(true);
         final NumberAxis yAxis = new NumberAxis();
 
-        xAxis.setAutoRanging(false);
-        xAxis.setLowerBound(200);
-        xAxis.setUpperBound(8000);
-        xAxis.setLabel("Some Data annotation");
-        yAxis.setLabel("Some Data annotation");
         //creating the chart
         final LineChart<Number,Number> lineChart =
                 new LineChart<Number,Number>(xAxis,yAxis);
