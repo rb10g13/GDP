@@ -40,6 +40,7 @@ public class DatabaseController {
 			//This makes sense to me. Good luck anyone else.
 			Document newDoc = new Document();
 			newDoc.append("_id", ciNumber);
+			newDoc.append("ear", ear);
 			newDoc.append("working",outcome);
 			List<Document> testInfo = new ArrayList<Document>();
 			Document testInfoDocument = new Document();
@@ -75,29 +76,6 @@ public class DatabaseController {
 			return convertListToArray((List<Double>) dataList.get(0).get("frc"));
 		}
 	}
-	
-	
-	public double[] getLastTest(int ciNumber){
-		Document ciEntry = collection.find(eq("_id", ciNumber)).first();
-		if(ciEntry == null){
-			return null;
-		}else{
-			//Theres so much that could go wrong here too...
-			List<Document> dataList = (List<Document>) ciEntry.get("tests");
-			return convertListToArray((List<Double>) dataList.get(dataList.size()-1).get("frc"));
-		}
-	}
-	
-	
-	//Gets all CI numbers of non working mics
-	public ArrayList<Integer> getFaulty(){
-		ArrayList<Integer> faulty = new ArrayList<Integer>();
-		for(Document entry : collection.find(eq("working", 0))){
-			faulty.add((Integer) entry.get("_id"));
-		}
-		return faulty;
-	}
-
 	
 	
 	public void shutdown(){
