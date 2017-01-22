@@ -17,7 +17,7 @@ import javax.sound.sampled.TargetDataLine;
 import javax.sound.sampled.Mixer.Info;
 
 public class Recorder implements Callable<float[]> {
-    public static int sampleRate = '걄';
+    public static int sampleRate = 44100;
     public static int bitsPerSample = 16;
     public static int channels = 1;
 

@@ -37,7 +37,7 @@ public class CITest {
         }
     }
 
-    private static boolean compare(double[] initialData, double[] newData) {
+    public static boolean compare(double[] initialData, double[] newData) {
         double[] difference = new double[initialData.length];
 
         for(int i = 0; i < initialData.length; ++i) {

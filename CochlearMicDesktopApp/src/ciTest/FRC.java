@@ -67,24 +67,24 @@ public class FRC {
         float maxWindowAverage = 0.0F;
 
         for(int newData = 0; newData < 2 * windowSize; ++newData) {
-            float count = average(Arrays.copyOfRange(recording, newData, newData + '걄'));
+            float count = average(Arrays.copyOfRange(recording, newData, newData + 44100));
             if(count > maxWindowAverage) {
                 maxWindowIndex = newData;
                 maxWindowAverage = count;
             }
         }
 
-        double[] var7 = new double['걄'];
-        int var8 = 0;
-
-        for(int i = maxWindowIndex; i < maxWindowIndex + '걄'; ++i) {
-            var7[var8] = (double)recording[i];
-            ++var8;
-        }
-
-        return var7;
-    }
-
+      //Get the portion of the array required and convert to double
+  		double[] newData = new double[44100];
+  		int count = 0;
+  		for(int i = maxWindowIndex; i < maxWindowIndex+44100; i++){
+  			newData[count] = (double) recording[i];
+ 			//System.out.println(newData[count]);
+  			count++;
+  		}
+  		
+  		return newData;
+  	}
     private static float average(float[] data) {
         float total = 0.0F;
         float[] var5 = data;
