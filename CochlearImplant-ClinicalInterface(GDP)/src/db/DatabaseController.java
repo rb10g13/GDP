@@ -6,11 +6,15 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import sample.CI;
+
 import static com.mongodb.client.model.Filters.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import sample.CI;
 
 public class DatabaseController {
  
@@ -26,19 +30,20 @@ public class DatabaseController {
 		database = mongoClient.getDatabase("gdp");
 		collection = database.getCollection("CITests");
 	}
-	
-	
+
+
 	//NEVER RUN THIS BEFORE GETTING THE INITIAL TEST DATA
 	// ^- I can't remember why... on reflection I don't see a problem doing this but just incase don't.
-	public void pushTestResult(int ciNumber, double[] testData, int outcome){
+	public void pushTestResult(int ciNumber, double[] testData, int outcome, String ear){
 
-		
+
 		if(collection.find(eq("_id", ciNumber)).first() == null){
 			//No document found relating to this CI number, insert a new document for this CI
-			
+
 			//This makes sense to me. Good luck anyone else.
 			Document newDoc = new Document();
 			newDoc.append("_id", ciNumber);
+			newDoc.append("ear", ear);
 			newDoc.append("working",outcome);
 			List<Document> testInfo = new ArrayList<Document>();
 			Document testInfoDocument = new Document();
@@ -47,18 +52,21 @@ public class DatabaseController {
 			testInfoDocument.append("out" +
 					"come", outcome);
 			testInfo.add(testInfoDocument);
-			
+
 			newDoc.append("tests", testInfo);
 			collection.insertOne(newDoc);
 		}else{
 			//If there is an entry for this CI number, append to the existing test data
-			collection.updateOne(new Document("_id", ciNumber), 
-					new Document("$push", 
+			collection.updateOne(new Document("_id", ciNumber),
+					new Document("$push",
 							new Document("tests", new Document("date", Calendar.getInstance().getTime())
 									.append("frc", convertArrayToList(testData)))));
-			
-			collection.updateOne(new Document("_id", ciNumber), new Document("working", outcome));
-       }
+
+
+			collection.updateOne(new Document("_id", ciNumber),
+					new Document("$set",
+							new Document("working", outcome)));
+		}
 	}
 	
 	public double[] getInitialTestData(int ciNumber){
@@ -86,11 +94,24 @@ public class DatabaseController {
 	
 	
 	//Gets all CI numbers of non working mics
-	public ArrayList<Integer> getFaulty(){
-		ArrayList<Integer> faulty = new ArrayList<Integer>();
+	public ArrayList<CI> getFaulty(){
+
+
+		ArrayList<CI> faulty = new ArrayList<CI>();
 		for(Document entry : collection.find(eq("working", 0))){
-			faulty.add((Integer) entry.get("_id"));
+			int id = (Integer) entry.get("_id");
+			String ear = (String) entry.get("ear");
+
+			//Theres so much that could go wrong here too...
+			List<Document> dataList = (List<Document>) entry.get("tests");
+			double[] initialTest = convertListToArray((List<Double>) dataList.get(0).get("frc"));
+			double[] finalTest = convertListToArray((List<Double>) dataList.get(dataList.size()-1).get("frc"));
+
+			faulty.add(new CI(String.valueOf(id), ear, initialTest, finalTest));
 		}
+
+
+
 		return faulty;
 	}
 

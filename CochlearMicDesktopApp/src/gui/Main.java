@@ -17,6 +17,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 
@@ -91,14 +93,16 @@ public class Main extends Application {
     			}
     		}
     	}
-    	
-
     }
     
     
     public void setOutcomeText(String text){
     	outcomeLabel.setText(text);
-    
+        outcomeLabel.setWrapText(true);
+        outcomeLabel.setTextAlignment(TextAlignment.CENTER);
+        outcomeLabel.setTextFill(Color.RED);
+
+
     }
 
     public static void main(String[] args) {

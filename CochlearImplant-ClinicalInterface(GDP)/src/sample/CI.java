@@ -2,13 +2,13 @@ package sample;
 
 public class CI {
 
-	private int ciNumber;
-	private String ear;
+	public String left;
+	public String ear;
 	private double[] initialTest;
 	private double[] finalTest;
 	
-    public CI(int ciNumber, String ear, double[] initialTest, double[] finalTest) {
-        this.ciNumber = ciNumber;
+    public CI(String ciNumber, String ear, double[] initialTest, double[] finalTest) {
+        this.left = ciNumber;
         this.ear = ear;
         this.initialTest = initialTest;
         this.finalTest = finalTest;
@@ -16,8 +16,8 @@ public class CI {
 
 
     //represents the CI Number
-    public int getCINumber() {
-        return ciNumber;
+    public String getLeft() {
+        return left;
     }
 
     //represents the Faulty implant
@@ -26,7 +26,7 @@ public class CI {
     }
     
     public double[] getInitial(){
-    	return this.intialTest;
+    	return this.initialTest;
     }
     
     public double[] getFinal(){

@@ -2,8 +2,6 @@ package sample;
 
 import db.DatabaseController;
 import javafx.application.Application;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,9 +15,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.util.Callback;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends Application {
 
@@ -34,6 +34,8 @@ public class Main extends Application {
     private int counter = 0;
     ObservableList<CI> data = FXCollections.observableArrayList();
 
+
+    private Map<String, CI> faulty;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -50,13 +52,13 @@ public class Main extends Application {
         launch(args);
     }
 
-    public void createChart() throws Exception{
+    public void createChart(String ciNumber) throws Exception{
 
+        this.initialRecording.getChildren().clear();
         final NumberAxis xAxis = new NumberAxis("Some Data annotation", 200, 8000, 10.5);
         xAxis.setTickLabelRotation(90d);
         xAxis.setAnimated(true);
         final NumberAxis yAxis = new NumberAxis();
-
         //creating the chart
         final LineChart<Number,Number> lineChart =
                 new LineChart<Number,Number>(xAxis,yAxis);
@@ -76,17 +78,14 @@ public class Main extends Application {
         //populating the series with data
 
 
-        DatabaseController db = new DatabaseController();
+        CI ci = this.faulty.get(ciNumber);
+        double[] initialArr = ci.getInitial();
+        double[] lastArr = ci.getFinal();
 
-        for(Integer CI_number: db.getFaulty()) {
-            double[] initialArr = db.getInitialTestData(CI_number);
-            double[] lastArr = db.getLastTest(CI_number);
-            for(int i=0; i<initialArr.length; i++) {
-                series.getData().add(new XYChart.Data(200+i, initialArr[i]));
-                series2.getData().add(new XYChart.Data(200+i, lastArr[i]));
-            }
+        for(int i=0; i<initialArr.length; i++) {
+            series.getData().add(new XYChart.Data(200+i, initialArr[i]));
+            series2.getData().add(new XYChart.Data(200+i, lastArr[i]));
         }
-        db.shutdown();
 
         this.initialRecording.getChildren().add(lineChart);
         lineChart.getData().add(series);
@@ -100,14 +99,16 @@ public class Main extends Application {
         }
         DatabaseController db = new DatabaseController();
         System.out.print(db.getFaulty().size());
-        for(Integer CI_number: db.getFaulty()) {
-            double[] initialArr = db.getInitialTestData(CI_number);
-            double[] lastArr = db.getLastTest(CI_number);
-            for (int i = 0; i < initialArr.length; i++) {
-                CI current = new CI(CI_number.toString(), "L");
-                data.add(current);
-            }
+
+        //Create a map for storing faulty ci's
+        ArrayList<CI> faultyList = db.getFaulty();
+        data.addAll(faultyList);
+
+        this.faulty = new HashMap<String, CI>();
+        for(CI ci : faultyList){
+            faulty.put(ci.getLeft(), ci);
         }
+
         TableView<CI> table = new TableView<CI>();
         TableColumn firstNameCol = new TableColumn("CI");
         TableColumn firstNameCol2 = new TableColumn("Faulty");
@@ -121,7 +122,7 @@ public class Main extends Application {
         firstNameCol.setCellValueFactory(new PropertyValueFactory<CI, String>("left"));
 
         //Faulty implant = right
-        firstNameCol2.setCellValueFactory(new PropertyValueFactory<CI, String>("right"));
+        firstNameCol2.setCellValueFactory(new PropertyValueFactory<CI, String>("ear"));
 
 
         table.getColumns().addAll(firstNameCol, firstNameCol2);
@@ -134,7 +135,7 @@ public class Main extends Application {
             }
             System.out.println(" <-> " + newValue.getLeft());
             try {
-                this.createChart();
+                this.createChart(newValue.getLeft());
             } catch (Exception e) {
 
             }
