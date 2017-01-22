@@ -1,40 +1,23 @@
 package ciTest;
 
-        import ciTest.FRC;
-        import db.DatabaseController;
-        import java.util.concurrent.ExecutionException;
-        import javax.sound.sampled.LineUnavailableException;
+import ciTest.FRC;
+import java.util.concurrent.ExecutionException;
+import javax.sound.sampled.LineUnavailableException;
 
 public class CITest {
     public CITest() {
     }
 
-    public static int performTest(int ciNumber) {
+    public static double[] performTest() {
         double[] frcData;
         try {
             frcData = FRC.generateFRC();
         } catch (InterruptedException | ExecutionException | LineUnavailableException var5) {
-            return -2;
+            return null;
         }
 
-        DatabaseController dbc = new DatabaseController();
-        double[] initialTest = dbc.getInitialTestData(ciNumber);
-        if(initialTest == null) {
-            dbc.pushTestResult(ciNumber, frcData, -1);
-            dbc.shutdown();
-            return -1;
-        } else {
-            boolean testOutcome = compare(initialTest, frcData);
-            if(testOutcome) {
-                dbc.pushTestResult(ciNumber, frcData, 1);
-                dbc.shutdown();
-                return 1;
-            } else {
-                dbc.pushTestResult(ciNumber, frcData, 0);
-                dbc.shutdown();
-                return 0;
-            }
-        }
+        return frcData;
+        
     }
 
     public static boolean compare(double[] initialData, double[] newData) {

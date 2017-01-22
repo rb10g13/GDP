@@ -31,7 +31,7 @@ public class DatabaseController {
 	
 	//NEVER RUN THIS BEFORE GETTING THE INITIAL TEST DATA
 	// ^- I can't remember why... on reflection I don't see a problem doing this but just incase don't.
-	public void pushTestResult(int ciNumber, double[] testData, int outcome){
+	public void pushTestResult(int ciNumber, double[] testData, int outcome, String ear){
 
 		
 		if(collection.find(eq("_id", ciNumber)).first() == null){

@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import ciTest.CITest;
+import db.DatabaseController;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,21 +50,45 @@ public class Main extends Application {
     }
 
     public void beginTest() {
-    	//int ciNumber = Integer.parseInt(ciField.getText());
+    	/*TODO - VALIDATION FOR CI INPUT
+    	*	-No String
+    	*	-Not empty
+    	*	-Just numbers
+    	*/
+    	int ciNumber = Integer.parseInt(ciField.getText());
 
     	String ear = "";
-		if(right.isSelected()){
+    	if(right.isSelected()){
     		ear = "R";
-		}else if(left.isSelected()){
-			ear = "L";
-		}
-    	
-		if(ear.length() == 0){
+    	}else if(left.isSelected()){
+    		ear = "L";
+    	}
+
+    	if(ear.length() == 0){
     		this.setOutcomeText("Please select which implant you are testing (left/ right)");
-		}else{
-        	//int outcome = CITest.performTest(ciNumber);
-            //System.out.println("outcome of test: "+outcome);
-		}
+    	}else{
+
+    		double[] frcData = CITest.performTest();
+
+    		DatabaseController dbc = new DatabaseController();
+    		double[] initialTest = dbc.getInitialTestData(ciNumber);
+    		if(initialTest == null) {
+    			dbc.pushTestResult(ciNumber, frcData, -1, ear);
+    			dbc.shutdown();
+    			setOutcomeText("Intial test saved");
+    		} else {
+    			boolean testOutcome = CITest.compare(initialTest, frcData);
+    			if(testOutcome) {
+    				dbc.pushTestResult(ciNumber, frcData, 1, ear);
+    				dbc.shutdown();
+    				setOutcomeText("Test passed");
+    			} else {
+    				dbc.pushTestResult(ciNumber, frcData, 0, ear);
+    				dbc.shutdown();
+    				setOutcomeText("Test failed, please try again");
+    			}
+    		}
+    	}
     	
 
     }
