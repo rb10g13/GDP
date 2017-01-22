@@ -24,13 +24,14 @@ public class CITest {
             dbc.shutdown();
             return -1;
         } else {
-            dbc.shutdown();
             boolean testOutcome = compare(initialTest, frcData);
             if(testOutcome) {
                 dbc.pushTestResult(ciNumber, frcData, 1);
+                dbc.shutdown();
                 return 1;
             } else {
                 dbc.pushTestResult(ciNumber, frcData, 0);
+                dbc.shutdown();
                 return 0;
             }
         }

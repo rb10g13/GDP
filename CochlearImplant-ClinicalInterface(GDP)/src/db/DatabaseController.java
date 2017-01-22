@@ -1,17 +1,16 @@
 package db;
 
+import org.bson.Document;
+
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
+import static com.mongodb.client.model.Filters.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import static com.mongodb.client.model.Filters.*;
-import static com.mongodb.client.model.Filters.eq;
 
 public class DatabaseController {
  
@@ -57,12 +56,9 @@ public class DatabaseController {
 					new Document("$push", 
 							new Document("tests", new Document("date", Calendar.getInstance().getTime())
 									.append("frc", convertArrayToList(testData)))));
-
-
-			collection.updateOne(new Document("_id", ciNumber),
-					new Document("$set",
-							new Document("working", outcome)));
-		}
+			
+			collection.updateOne(new Document("_id", ciNumber), new Document("working", outcome));
+       }
 	}
 	
 	public double[] getInitialTestData(int ciNumber){

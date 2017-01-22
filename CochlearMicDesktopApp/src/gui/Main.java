@@ -52,7 +52,7 @@ public class Main extends Application {
     }
 
     public void beginTest() throws Exception{
-        outcome = CITest.performTest(ciNumber);
+        outcome = CITest.performTest(1234);
         System.out.println("outcome of test: "+outcome);
     }
 

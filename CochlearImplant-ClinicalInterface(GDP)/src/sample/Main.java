@@ -1,5 +1,6 @@
 package sample;
 
+import db.DatabaseController;
 import javafx.application.Application;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
@@ -16,6 +17,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -52,6 +54,10 @@ public class Main extends Application {
 
         final NumberAxis xAxis = new NumberAxis();
         final NumberAxis yAxis = new NumberAxis();
+
+        xAxis.setAutoRanging(false);
+        xAxis.setLowerBound(200);
+        xAxis.setUpperBound(8000);
         xAxis.setLabel("Some Data annotation");
         yAxis.setLabel("Some Data annotation");
         //creating the chart
@@ -71,47 +77,39 @@ public class Main extends Application {
         series2.setName("Current recording");
         lineChart.setStyle(".default-color0.chart-series-line { -fx-stroke: #e9967a; }");
         //populating the series with data
-        //200 - 8000 for X
-        //Y will be the floating point from the array of data.
-        series.getData().add(new XYChart.Data(1, 23));
-        series.getData().add(new XYChart.Data(2, 14));
-        series.getData().add(new XYChart.Data(3, 15));
-        series.getData().add(new XYChart.Data(4, 24));
-        series.getData().add(new XYChart.Data(5, 34));
-        series.getData().add(new XYChart.Data(6, 36));
-        series.getData().add(new XYChart.Data(7, 22));
-        series.getData().add(new XYChart.Data(8, 45));
-        series.getData().add(new XYChart.Data(9, 43));
-        series.getData().add(new XYChart.Data(10, 17));
-        series.getData().add(new XYChart.Data(11, 29));
-        series.getData().add(new XYChart.Data(12, 25));
 
-        series2.getData().add(new XYChart.Data(4, 73));
-        series2.getData().add(new XYChart.Data(6, 44));
-        series2.getData().add(new XYChart.Data(1, 5));
-        series2.getData().add(new XYChart.Data(3, 14));
-        series2.getData().add(new XYChart.Data(2, 3));
-        series2.getData().add(new XYChart.Data(7, 38));
-        series2.getData().add(new XYChart.Data(8, 232));
-        series2.getData().add(new XYChart.Data(1, 5));
-        series2.getData().add(new XYChart.Data(2, 33));
-        series2.getData().add(new XYChart.Data(30, 77));
-        series2.getData().add(new XYChart.Data(21, 9));
-        series2.getData().add(new XYChart.Data(2, 5));
 
+        DatabaseController db = new DatabaseController();
+
+        for(Integer CI_number: db.getFaulty()) {
+            double[] initialArr = db.getInitialTestData(CI_number);
+            double[] lastArr = db.getLastTest(CI_number);
+            for(int i=0; i<initialArr.length; i++) {
+                series.getData().add(new XYChart.Data(200+i, initialArr[i]));
+                series2.getData().add(new XYChart.Data(200+i, lastArr[i]));
+            }
+        }
+        db.shutdown();
 
         this.initialRecording.getChildren().add(lineChart);
         lineChart.getData().add(series);
         lineChart.getData().add(series2);
+        lineChart.setCreateSymbols(false);
     }
 
     public void generateRecordings() {
         if(!data.isEmpty()) {
             return;
         }
-        for (int i=0; i<60; i++) {
-            CI ci = new CI(""+i, "L");
-            data.add(ci);
+        DatabaseController db = new DatabaseController();
+        System.out.print(db.getFaulty().size());
+        for(Integer CI_number: db.getFaulty()) {
+            double[] initialArr = db.getInitialTestData(CI_number);
+            double[] lastArr = db.getLastTest(CI_number);
+            for (int i = 0; i < initialArr.length; i++) {
+                CI current = new CI(CI_number.toString(), "L");
+                data.add(current);
+            }
         }
         TableView<CI> table = new TableView<CI>();
         TableColumn firstNameCol = new TableColumn("CI");

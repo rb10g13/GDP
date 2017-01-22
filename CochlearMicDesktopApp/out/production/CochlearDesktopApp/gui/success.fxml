@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox prefHeight="310.0" prefWidth="158.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Main">
+   <children>
+      <AnchorPane prefHeight="329.0" prefWidth="392.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="72.0" prefWidth="392.0" text="Cochlear Implant Test">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="89.0" layoutY="147.0" prefHeight="17.0" prefWidth="214.0" text="Your implant is working correctly" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
