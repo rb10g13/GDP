@@ -56,6 +56,11 @@ public class Main extends Application {
 
     	try {
     	    ciNumber = Integer.parseInt(ciField.getText());
+    	    
+    	    //Checks if input is negative
+    	    if(Math.signum(ciNumber) < 0){
+                this.setOutcomeText("Your CI number must be positive. Please try again (Numbers(0-9) can be used only).");
+    	    }
         } catch(NumberFormatException e) {
             this.setOutcomeText("Your CI number is of incorrect format. Please try again (Numbers(0-9) can be used only).");
             return;
