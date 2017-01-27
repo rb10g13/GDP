@@ -1,0 +1,139 @@
+.text-bold {
+  font-weight: 500;
+}
+
+button.primaryButton {
+  position: relative;
+  background-color: $primary-color;
+  color: white;
+  text-align: center;
+  font-size: 26px;
+  margin-right: auto;
+  margin-left: auto;
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  height: 75px;
+  text-transform: none;
+
+  &.activated {
+    background-color: darken($primary-color, 5);
+  }
+
+  .icon-right {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    font-size: 40px;
+    line-height: 75px;
+  }
+
+  .icon-left {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    font-size: 40px;
+    line-height: 75px;
+  }
+}
+
+h2 {
+  font-weight: normal !important;
+  font-size: 22px;
+  color: $primary-color;
+  font-weight: normal;
+  text-align: center;
+}
+
+.container {
+  position: absolute;
+  left: 30px;
+  top: 35%;
+  transform: translateY(-50%);
+  margin: auto;
+  display: block;
+  width: calc(100% - 60px);
+
+  // height: calc(100% - 60px - 114px);
+}
+
+input {
+  height: 40px;
+  width: 100%;
+  max-width: 240px;
+  margin: auto !important;
+  display: block;
+  border: solid 3px $primary-color;
+  border-radius: 6px;
+  background-color: $light-grey;
+  font-size: 20px !important;
+  text-align: center;
+  color: darken(#a9a9a9, 20) !important;
+  font-weight: bold !important;
+}
+
+.toggleButton {
+  border: solid 3px $primary-color;
+  background-color: $primary-color-20 !important;
+  color: darken(#a9a9a9, 20) !important;
+
+  &.active {
+    background-color: $primary-color !important;
+    color: white !important;
+  }
+}
+
+label {
+  display: block;
+  color: $primary-color;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  max-height: 250px;
+  min-height: 180px;
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+
+  svg {
+    width: 80px;
+    height: 80px;
+
+    circle, line {
+      stroke: $primary-color;
+    }
+  }
+}
+
+@media (max-height: 600px) {
+  button.primaryButton {
+    font-size: 22px;
+    max-width: 220px;
+    height: 60px;
+
+    .icon-right {
+      right: 40px;
+      font-size: 30px;
+      line-height: 60px;
+    }
+
+    .icon-left {
+      left: 40px;
+      font-size: 30px;
+      line-height: 60px;
+    }
+  }
+
+  h2 {
+    font-size: 20px !important;
+  }
+
+  .spinner {}
+}

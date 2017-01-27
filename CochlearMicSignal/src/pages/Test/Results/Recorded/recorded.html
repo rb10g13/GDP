@@ -1,0 +1,14 @@
+<ion-content>
+  <app-header></app-header>
+  <div class="container">
+    <h2 id="success-title">Success</h2>
+    <h2>The initial performance of your cochlear implant has been recorded</h2>
+    <i id="check-icon" class="fa fa-check"></i>
+  </div>
+  <div class="button-container">
+    <button ion-button id="testFinishButton" class="primaryButton" (click)="testAgain()">
+      <span class="label">{{buttonName}}</span>
+    </button>
+  </div>
+  <app-step-counter></app-step-counter>
+</ion-content>

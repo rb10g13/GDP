@@ -1,0 +1,15 @@
+<ion-content>
+  <app-header></app-header>
+  <div class="container">
+    <h2 id="fail-title">Failure</h2>
+    <h2>Your Cochlear implant is defective. The clinic has been contacted</h2>
+    <i id="alert-icon" class="fa fa-exclamation-triangle"></i>
+  </div>
+  <div class="button-container">
+    <button ion-button id="testAgainButton" class="primaryButton" (click)="testAgain()">
+      <span class="label">{{buttonName}}</span>
+      <ion-icon class="icon-left fa fa-repeat"></ion-icon>
+    </button>
+  </div>
+  <app-step-counter></app-step-counter>
+</ion-content>

@@ -17,10 +17,16 @@ module.exports = function(app) {
     return res.sendStatus(400); // Bad Request
   };
 
-  var produceFRC = function() {
-    PythonShell.run('../../../CI_Tests/FRC.py', function(err) {
+  var produceFRC = function(recording) {
+    var options = {
+      scriptPath: '../CI_Tests',
+      args: [recording]
+    };
+
+    PythonShell.run('FRC.py', options, function(err, FRC) {
       if (err) throw err;
-      console.log('finished');
+
+      return FRC;
     });
   };
   produceFRC();
@@ -48,6 +54,8 @@ module.exports = function(app) {
     var recording = req.body.recording;
     var implant_id = req.body.implant_id;
 
+    var FRC = produceFRC(recording);
+
     var reading = {
       control: true,
       implant_id: implant_id,
@@ -66,6 +74,8 @@ module.exports = function(app) {
   app.post('/reading/new', bodyParser.json(), function(req, res) {
     var recording = req.body.recording;
     var implant_id = req.body.implant_id;
+
+    var FRC = produceFRC(recording);
 
     var reading = {
       control: false,
